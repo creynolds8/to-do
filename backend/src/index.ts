@@ -14,21 +14,26 @@ app.use(cors());
 
 app.use(express.json());
 
-app.get('/api/todos', (req: Request, res: Response) => {
-  const todos = [
-      { id: 1, title: 'Learn TypeScript', completed: false },
-      { id: 2, title: 'Build a To-Do App', completed: false }
-  ];
+const todos: Todo[] = [];
+
+app.get('/api/todos', (req: Request, res: Response) => {  
   res.json(todos);
 });
 
 app.post('/api/todos', (req: Request, res: Response) => {
   const { title } = req.body;
+
+  // commented out as it causes an error on ln 23 "no overload matches call"
+  // if (!title) {
+  //   return res.status(400).json({ message: 'Title is required' });
+  // }
+  
   const newTodo: Todo = {
     id: Date.now(),
     title,
     completed: false
   };
+  todos.push(newTodo)
   res.status(201).json(newTodo)
 })
 
