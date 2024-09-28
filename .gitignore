@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Vite build output
+dist/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Mac system files
+.DS_Store
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Yarn lock file (if using npm)
+yarn.lock
+
+# Vite-specific
+.vite/
+.cache/
+
+# IDE settings (optional)
+.vscode/
+.idea/
+
+# MacOS specific files
+.DS_Store
+
+# Optional - you may have these files for debugging, but you might want to ignore them:
+debug.log
