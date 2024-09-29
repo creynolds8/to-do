@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 interface Todo {
   id: number;
@@ -16,7 +17,7 @@ const App = () => {
       const response = await axios.get('/api/todos');
       setTodos(response.data);
     } catch (error) {
-      console.log('Error fetching Todos', error);
+      console.error('Error fetching Todos', error);
       
     }
   };
@@ -31,17 +32,26 @@ const App = () => {
     setTodos([...todos, newTodo])
   }
 
+  const handleToggleComplete = async (id:number, completed: boolean) => {    
+        
+    try {      
+      await axios.patch(`/api/todos/${id}`, { completed });
+
+      setTodos((prevTodos) =>         
+        prevTodos.map((todo) => 
+          todo.id === id ? { ...todo, completed } : todo
+        )
+      )
+    } catch (error) {
+      console.error('Error updating todo', error)
+    }
+  }
+
   return (
       <div>
         <h1>To-Do List</h1>
         <TodoForm onTodoAdded={handleTodoAdded} />
-        <ul>
-          {todos.map(todo => (
-            <li key={todo.id}>
-                {todo.title} - {todo.completed ? 'Completed' : 'Pending'}
-            </li>
-            ))}
-        </ul>
+        <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
       </div>
   );
 }
