@@ -17,8 +17,9 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
   };
 
   return (
-    <li>
+    <li  className="flex justify-start items-center">
       <input
+      className={`me-4 w-4 h-4 ${todo.completed ? "accent-green-600" : ""}`}
       type="checkbox"
       checked={todo.completed}
       onChange={handleChange}

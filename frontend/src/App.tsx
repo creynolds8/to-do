@@ -48,8 +48,8 @@ const App = () => {
   }
 
   return (
-      <div>
-        <h1 className="underline">To-Do List</h1>
+      <div className="mx-auto flex flex-col items-center">
+        <h1 className="w-fit text-lg underline underline-offset-4">To-Do List</h1>
         <TodoForm onTodoAdded={handleTodoAdded} />
         <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
       </div>

@@ -23,7 +23,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onToggleComplete }) => {
     )
   })
   return (
-    <div>
+    <div className="container">
       <ul>
         {todoComponents}
       </ul>
