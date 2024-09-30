@@ -49,7 +49,7 @@ const App = () => {
 
   return (
       <div>
-        <h1>To-Do List</h1>
+        <h1 className="underline">To-Do List</h1>
         <TodoForm onTodoAdded={handleTodoAdded} />
         <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
       </div>
