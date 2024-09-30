@@ -25,16 +25,18 @@ const TodoForm = ({ onTodoAdded }: TodoFormProps) => {
     }
   }
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    <div className="container my-4 flex flex-col items-center">
+      <h2>Add a new Todo:</h2>
+      <form className="flex flex-col items-center" onSubmit={handleSubmit}>
         <input
+          className="p-1 border-2 rounded outline-gray-400"
           type="text"
           value={title}
           onChange={e => {setTitle(e.target.value)}}
-          placeholder="Add new Todo"
+          placeholder="Title"
           required
           />
-        <button type="submit">Add!</button>
+        <button className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600" type="submit">Add!</button>
       </form>
     </div>
   );

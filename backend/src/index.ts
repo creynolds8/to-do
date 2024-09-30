@@ -24,9 +24,10 @@ app.post('/api/todos', (req: Request, res: Response) => {
   const { title } = req.body;
 
   // commented out as it causes an error on ln 23 "no overload matches call"
-  // if (!title) {
-  //   return res.status(400).json({ message: 'Title is required' });
-  // }
+  if (!title) {
+    return 
+    // res.status(400).json({ message: 'Title is required' });
+  }
   
   const newTodo: Todo = {
     id: Date.now(),
@@ -35,6 +36,23 @@ app.post('/api/todos', (req: Request, res: Response) => {
   };
   todos.push(newTodo)
   res.status(201).json(newTodo)
+})
+
+app.patch('/api/todos/:id', (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { completed } = req.body as { completed: boolean };
+  
+  const todo = todos.find((todo) => todo.id === parseInt(id));
+  if (!todo) {
+    return
+    // res.status(404).json({ message: 'Todo not found'});
+  }
+  if (typeof completed !== 'boolean') {
+    return 
+    // res.status(400).json({ message: 'Invalid complete status'});
+  }
+  todo.completed = completed;
+  res.status(200).json(todo)
 })
 
 app.listen(PORT, () => {
