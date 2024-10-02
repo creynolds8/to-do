@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import TodoDetails from "./components/TodoDetails";
 
 interface Todo {
   id: number;
@@ -48,11 +51,22 @@ const App = () => {
   }
 
   return (
-      <div className="mx-auto flex flex-col items-center">
-        <h1 className="w-fit text-lg underline underline-offset-4">To-Do List</h1>
-        <TodoForm onTodoAdded={handleTodoAdded} />
-        <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
-      </div>
+    <Router>
+      <Routes>
+        
+        <Route path="/" element={
+            <div className="mx-auto flex flex-col items-center">
+              <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
+              <TodoForm onTodoAdded={handleTodoAdded} />
+              <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
+            </div>
+          } />
+        <Route path="/todos/:id" element={<TodoDetails />} />
+        
+
+      
+      </Routes>
+    </Router>
   );
 }
 

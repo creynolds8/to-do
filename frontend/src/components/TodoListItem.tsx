@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Todo {
   id: number;
@@ -25,6 +26,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
       onChange={handleChange}
       />
       {todo.title} - {todo.completed ? 'Completed' : 'Pending'}
+      <Link to={`/todos/${todo.id}`} className="me-0 ms-auto">View</Link>
     </li>
   )
 }
