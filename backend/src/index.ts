@@ -20,6 +20,17 @@ app.get('/api/todos', (req: Request, res: Response) => {
   res.json(todos);
 });
 
+app.get('/api/todos/:id', (req: Request, res: Response) => {
+  const { id } = req.params;
+  const todo = todos.find((todo) => todo.id === parseInt(id));
+
+  if (!todo) {
+    return 
+    // res.status(404).json(({ message: "Todo not found" }))
+  }
+  res.status(200).json(todo);
+})
+
 app.post('/api/todos', (req: Request, res: Response) => {
   const { title } = req.body;
 

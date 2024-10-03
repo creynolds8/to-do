@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface Todo {
   id: number;
@@ -17,14 +18,22 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
   };
 
   return (
-    <li  className="flex justify-start items-center">
+    <li  className="">
+      <div className="flex items-center">
       <input
       className={`me-4 w-4 h-4 ${todo.completed ? "accent-green-600" : ""}`}
       type="checkbox"
       checked={todo.completed}
       onChange={handleChange}
       />
-      {todo.title} - {todo.completed ? 'Completed' : 'Pending'}
+        {todo.title}
+      <Link to={`/todos/${todo.id}`} className="me-2 ms-auto">
+        <img src="/three-dots.svg" alt="View" width="16px" className="hover-enlarge" />
+      </Link>
+      </div>
+      <span className="text-sm">Status:
+        <span className="ms-2 text-gray-400">{todo.completed ? 'Completed' : 'Pending'}</span>
+      </span>
     </li>
   )
 }
