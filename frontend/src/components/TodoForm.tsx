@@ -34,6 +34,7 @@ const TodoForm = ({ onTodoAdded }: TodoFormProps) => {
           value={title}
           onChange={e => {setTitle(e.target.value)}}
           placeholder="Title"
+          maxLength={25}
           required
           />
         <button className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600" type="submit">Add!</button>

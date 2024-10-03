@@ -6,6 +6,8 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoDetails from "./components/TodoDetails";
 
+import "../src/App.css";
+
 interface Todo {
   id: number;
   title: string;
@@ -61,7 +63,7 @@ const App = () => {
               <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
             </div>
           } />
-        <Route path="/todos/:id" element={<TodoDetails />} />
+        <Route path="/todos/:id" element={<TodoDetails onToggleComplete={handleToggleComplete}/>} />
         
 
       
