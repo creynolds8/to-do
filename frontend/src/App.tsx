@@ -72,18 +72,24 @@ const App: React.FC = () => {
 
     <Router>
       <Routes>
-        
-        <Route path="/" element={
-          <div className="mx-auto flex flex-col items-center">
+        <Route path="/"
+          element={
+            <div className="mx-auto flex flex-col items-center">
               <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
               <TodoForm onSubmit={handleTodoAdded} />
               <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
             </div>
-          } />
-        <Route path="/todos/:id" element={<TodoDetails onToggleComplete={handleToggleComplete} onUpdateTodo={handleUpdateTodo}/>} />
-        
-
-      
+          } 
+        />
+        <Route
+          path="/todos/:id"
+          element={
+            <TodoDetails 
+            onToggleComplete={handleToggleComplete}
+            onUpdateTodo={handleUpdateTodo}
+            />
+          } 
+        />
       </Routes>
     </Router>
     </div>

@@ -30,9 +30,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
         console.error('Error fetching todo', error);
       }
     };
-    
     fetchTodo();
-    
   },[id]);
   
   if (!todo) {
