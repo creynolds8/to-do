@@ -7,6 +7,7 @@ const PORT = 8000;
 interface Todo {
   id: number;
   title: string;
+  message: string;
   completed: boolean;
 }
 
@@ -32,8 +33,8 @@ app.get('/api/todos/:id', (req: Request< {id: string }>, res: Response<Todo | { 
   res.status(200).json(todo);
 })
 
-app.post('/api/todos', (req: Request, res: Response) => {
-  const { title } = req.body;
+app.post('/api/todos', (req: Request, res: Response) => {  
+  const { title, message } = req.body;
 
   // commented out as it causes an error on ln 23 "no overload matches call"
   if (!title) {
@@ -44,6 +45,7 @@ app.post('/api/todos', (req: Request, res: Response) => {
   const newTodo: Todo = {
     id: Date.now(),
     title,
+    message,
     completed: false
   };
   todos.push(newTodo)
@@ -69,14 +71,15 @@ app.patch('/api/todos/:id', (req: Request, res: Response) => {
 
 app.put('/api/todos/:id', (req: Request, res: Response)=> {
   const { id } = req.params;  
-  const { title } = req.body as { title: string };  
+  const { title, message } = req.body as { title: string, message: string };  
 
   const todo = todos.find((todo) => todo.id === parseInt(id));
   if (!todo) {
     return 
     // res.status(404).json({ message: 'Todo not found' });
   }
-  todo.title = title;  
+  todo.title = title;
+  todo.message = message;
   res.status(200).json(todo);
 })
 

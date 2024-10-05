@@ -4,6 +4,7 @@ import TodoListItem from "./TodoListItem";
 interface Todo {
   id: number;
   title: string;
+  message: string;
   completed: boolean;
 }
 
@@ -24,7 +25,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onToggleComplete }) => {
   })
   return (
     <div className="container">
-      <ul>
+      <ul className="p-4 border-2 rounded outline-gray-400 flex flex-col gap-4">
         {todoComponents}
       </ul>
     </div>
