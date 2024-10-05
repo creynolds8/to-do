@@ -14,7 +14,7 @@ interface Todo {
   completed: boolean;
 }
 
-const App = () => {
+const App: React.FC = () => {
   const [ todos, setTodos ] = useState<Todo[]>([]);
 
   const fetchTodos = async () => {
@@ -33,8 +33,9 @@ const App = () => {
   }, []);
 
   // Handle new Todo 
-  const handleTodoAdded = (newTodo: Todo) => {
-    setTodos([...todos, newTodo])
+  const handleTodoAdded = (todo: {id: number, title: string, completed: boolean}) => {
+    setTodos([...todos, todo])
+    
   }
 
   const handleToggleComplete = async (id:number, completed: boolean) => {    
@@ -48,27 +49,43 @@ const App = () => {
         )
       )
     } catch (error) {
-      console.error('Error updating todo', error)
+      console.error('Error completing todo', error)
     }
-  }
+  };
+
+  const handleUpdateTodo = async (id: number, title: string) => {
+    try {
+      const response = await axios.put(`/api/todos/${id}`, { title });      
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === id ? { ...todo, title: response.data.title} : todo
+        )
+      );
+    } catch (error) {
+      console.error('Error updating todo', error);
+    }
+  };
 
   return (
+    <div className="container mt-8 max-w-screen-md mx-auto lg:text-xl">
+
     <Router>
       <Routes>
         
         <Route path="/" element={
-            <div className="mx-auto flex flex-col items-center">
+          <div className="mx-auto flex flex-col items-center">
               <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
-              <TodoForm onTodoAdded={handleTodoAdded} />
+              <TodoForm onSubmit={handleTodoAdded} />
               <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
             </div>
           } />
-        <Route path="/todos/:id" element={<TodoDetails onToggleComplete={handleToggleComplete}/>} />
+        <Route path="/todos/:id" element={<TodoDetails onToggleComplete={handleToggleComplete} onUpdateTodo={handleUpdateTodo}/>} />
         
 
       
       </Routes>
     </Router>
+    </div>
   );
 }
 
