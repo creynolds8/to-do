@@ -16,8 +16,9 @@ app.use(express.json());
 
 const todos: Todo[] = [];
 
-app.get('/api/todos', (req: Request, res: Response<Todo[]>) => {  
-  res.json(todos);
+app.get('/api/todos', (req: Request, res: Response<Todo[]>) => {
+  const sortedTodos = [...todos].sort((a, b) => b.id - a.id)  
+  res.json(sortedTodos);
 });
 
 app.get('/api/todos/:id', (req: Request< {id: string }>, res: Response<Todo | { message: string }>) => {

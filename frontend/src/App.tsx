@@ -34,7 +34,7 @@ const App: React.FC = () => {
 
   // Handle new Todo 
   const handleTodoAdded = (todo: {id: number, title: string, completed: boolean}) => {
-    setTodos([...todos, todo])
+    setTodos([todo, ...todos])
     
   }
 
