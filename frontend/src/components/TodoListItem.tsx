@@ -31,7 +31,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
         <img src="/three-dots.svg" alt="View" width="16px" className="hover-enlarge" />
       </Link>
       </div>
-      <span className="text-sm">Status:
+      <span className="text-sm lg:text-base">Status:
         <span className="ms-2 text-gray-400">{todo.completed ? 'Completed' : 'Pending'}</span>
       </span>
     </li>
