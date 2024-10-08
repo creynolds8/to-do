@@ -7,12 +7,13 @@ import TodoForm from "./TodoForm";
 interface Todo {
   id: number;
   title: string;
+  message: string;
   completed: boolean;
 }
 
 interface TodoDetailProps {
   onToggleComplete: (id: number, completed: boolean) => void;
-  onUpdateTodo: (id: number, title: string) => void;
+  onUpdateTodo: (id: number, title: string, message: string) => void;
 }
 
 const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo }) => {
@@ -29,22 +30,21 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
         console.error('Error fetching todo', error);
       }
     };
-    
     fetchTodo();
-    
   },[id]);
   
   if (!todo) {
     return <div>Loading...</div>;
   }
 
-  const handleUpdate = async (todo: {id: number, title: string}) => {
+  const handleUpdate = async (todo: {id: number, title: string, message: string}) => {
     if (!todo) return;
-    
+
     const updatedTitle = todo.title
-    onUpdateTodo(todo.id, updatedTitle);
+    const updatedMessage = todo.message
+    onUpdateTodo(todo.id, updatedTitle, updatedMessage);
     setIsEditing(false);
-    setTodo((prevTodo) => prevTodo ? { ... prevTodo, title: updatedTitle} : null)
+    setTodo((prevTodo) => prevTodo ? { ... prevTodo, title: updatedTitle, message: updatedMessage} : null)
   }
 
 
@@ -67,9 +67,8 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
         <TodoForm todo={todo} onSubmit={handleUpdate} />
       </>
     ) : (
-        <div>
-        <div className="mt-8">
-          <div className="flex items-center">
+      <div className="mt-8">
+        <div className="flex items-center">
           <input
           className={`me-4 w-4 h-4 ${todo.completed ? "accent-green-600" : ""}`}
           type="checkbox"
@@ -83,11 +82,18 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
             </button>
           </div>
         </div>
-          <span className="text-sm">Status: 
-            <span className="ms-2 text-gray-400">{todo.completed ? 'Completed' : 'Pending'}</span>
-          </span>      
+        <span className="text-sm">Status:
+          <span className="ms-2">
+            {todo.completed ?
+            <span className="text-green-600">Completed</span> :
+            <span className="text-gray-400">Pending</span>
+            }
+          </span>
+        </span>      
+        <div className="flex flex-col mt-4">
+          <span className="underline underline-offset-2 text-lg">Additional Info:</span>
+          <span className="text-sm md:text-base">{todo.message}</span>
         </div>
-        
       </div>
     )}
   </div>

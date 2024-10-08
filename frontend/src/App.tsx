@@ -11,6 +11,7 @@ import "../src/App.css";
 interface Todo {
   id: number;
   title: string;
+  message: string;
   completed: boolean;
 }
 
@@ -33,7 +34,7 @@ const App: React.FC = () => {
   }, []);
 
   // Handle new Todo 
-  const handleTodoAdded = (todo: {id: number, title: string, completed: boolean}) => {
+  const handleTodoAdded = (todo: {id: number, title: string, message:string, completed: boolean}) => {
     setTodos([todo, ...todos])
     
   }
@@ -53,12 +54,12 @@ const App: React.FC = () => {
     }
   };
 
-  const handleUpdateTodo = async (id: number, title: string) => {
+  const handleUpdateTodo = async (id: number, title: string, message: string) => {
     try {
-      const response = await axios.put(`/api/todos/${id}`, { title });      
+      const response = await axios.put(`/api/todos/${id}`, { title, message });      
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
-          todo.id === id ? { ...todo, title: response.data.title} : todo
+          todo.id === id ? { ...todo, title: response.data.title, message: response.data.message} : todo
         )
       );
     } catch (error) {
@@ -69,22 +70,28 @@ const App: React.FC = () => {
   return (
     <div className="container mt-8 max-w-screen-md mx-auto lg:text-xl">
 
-    <Router>
-      <Routes>
-        
-        <Route path="/" element={
-          <div className="mx-auto flex flex-col items-center">
-              <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
-              <TodoForm onSubmit={handleTodoAdded} />
-              <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
-            </div>
-          } />
-        <Route path="/todos/:id" element={<TodoDetails onToggleComplete={handleToggleComplete} onUpdateTodo={handleUpdateTodo}/>} />
-        
-
-      
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/"
+            element={
+              <div className="mx-auto flex flex-col items-center">
+                <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
+                <TodoForm onSubmit={handleTodoAdded} />
+                <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
+              </div>
+            } 
+          />
+          <Route
+            path="/todos/:id"
+            element={
+              <TodoDetails 
+              onToggleComplete={handleToggleComplete}
+              onUpdateTodo={handleUpdateTodo}
+              />
+            } 
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }

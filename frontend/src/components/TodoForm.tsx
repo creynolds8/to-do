@@ -2,36 +2,39 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface TodoFormProps {
-  todo?: { id: number; title: string; completed: boolean;};
-  onSubmit: (todo: { id: number; title: string; completed: boolean }) => void
+  todo?: { id: number; title: string; message:string; completed: boolean;};
+  onSubmit: (todo: { id: number; title: string; message: string; completed: boolean }) => void
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
   const [title, setTitle] = useState<string>(todo ? todo.title : "");
+  const [message, setMessage] = useState<string>(todo ? todo.message : "");
 
   useEffect(() => {
     if (todo) {
       setTitle(todo.title);
+      setMessage(todo.message)
     }
   },[todo])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    // check for only white space inputs
     if (!title.trim()) {
       alert('Please add a valid title.') 
       return;
     }
-
     try {
+      // if todo is not set, info will be posted as a new todo
       if (!todo) {
-        
-        const response = await axios.post('/api/todos', { title });        
+        const response = await axios.post('/api/todos', { title, message });        
         onSubmit({ ...response.data });        
-        setTitle('');        
+        setTitle('');
+        setMessage('');
+      // otherwise info is used to update the todo
       } else {        
-        const response = await axios.put(`/api/todos/${todo.id}`, { title })        
-        onSubmit({id: response.data.id, title: response.data.title, completed: response.data.completed })
+        const response = await axios.put(`/api/todos/${todo.id}`, { title, message })        
+        onSubmit({ ...response.data })
       }
     } catch (error) {
       console.error('Error adding todo', error);
@@ -40,7 +43,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
   return (
     <div className="container my-4 flex flex-col items-center">
       <h2>{todo ? "Update Todo" : "Add Todo"}</h2>
-      <form className="flex flex-col items-center" onSubmit={handleSubmit}>
+      <form className="flex flex-col items-center gap-2" onSubmit={handleSubmit}>
         <input
           className="p-1 border-2 rounded outline-gray-400"
           type="text"
@@ -48,10 +51,25 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
           value={title}
           onChange={e => {setTitle(e.target.value)}}
           placeholder="Title"
-          maxLength={25}
+          maxLength={20}
+          autoFocus
           required
           />
-        <button className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600" type="submit">{todo ? "Update Todo" : "Add Todo"}</button>
+        <textarea
+          className="p-1 border-2 rounded outline-gray-400"
+          name="message"
+          value={message}
+          onChange={e => {setMessage(e.target.value)}}
+          placeholder="Additional Info..."
+          maxLength={100}
+          rows={3}
+          />
+        <button
+          className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600"
+          type="submit"
+          >
+          {todo ? "Update Todo" : "Add Todo"}
+        </button>
       </form>
     </div>
   );
