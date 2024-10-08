@@ -70,28 +70,28 @@ const App: React.FC = () => {
   return (
     <div className="container mt-8 max-w-screen-md mx-auto lg:text-xl">
 
-    <Router>
-      <Routes>
-        <Route path="/"
-          element={
-            <div className="mx-auto flex flex-col items-center">
-              <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
-              <TodoForm onSubmit={handleTodoAdded} />
-              <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
-            </div>
-          } 
-        />
-        <Route
-          path="/todos/:id"
-          element={
-            <TodoDetails 
-            onToggleComplete={handleToggleComplete}
-            onUpdateTodo={handleUpdateTodo}
-            />
-          } 
-        />
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path="/"
+            element={
+              <div className="mx-auto flex flex-col items-center">
+                <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
+                <TodoForm onSubmit={handleTodoAdded} />
+                <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
+              </div>
+            } 
+          />
+          <Route
+            path="/todos/:id"
+            element={
+              <TodoDetails 
+              onToggleComplete={handleToggleComplete}
+              onUpdateTodo={handleUpdateTodo}
+              />
+            } 
+          />
+        </Routes>
+      </Router>
     </div>
   );
 }

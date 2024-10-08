@@ -39,7 +39,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
 
   const handleUpdate = async (todo: {id: number, title: string, message: string}) => {
     if (!todo) return;
-    
+
     const updatedTitle = todo.title
     const updatedMessage = todo.message
     onUpdateTodo(todo.id, updatedTitle, updatedMessage);

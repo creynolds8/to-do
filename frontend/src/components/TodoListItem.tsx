@@ -37,9 +37,14 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
           </Link>
         </div>
       </div>
-      <span className="text-sm lg:text-base">Status:
-        <span className="ms-2 text-gray-400">{todo.completed ? 'Completed' : 'Pending'}</span>
-      </span>
+      <span className="text-sm">Status:
+          <span className="ms-2">
+            {todo.completed ?
+            <span className="text-green-600">Completed</span> :
+            <span className="text-gray-400">Pending</span>
+            }
+          </span>
+        </span>
     </li>
   )
 }

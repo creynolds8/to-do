@@ -52,16 +52,17 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
           onChange={e => {setTitle(e.target.value)}}
           placeholder="Title"
           maxLength={20}
+          autoFocus
           required
           />
-        <input
+        <textarea
           className="p-1 border-2 rounded outline-gray-400"
-          type="text"
           name="message"
           value={message}
           onChange={e => {setMessage(e.target.value)}}
           placeholder="Additional Info..."
           maxLength={100}
+          rows={3}
           />
         <button
           className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600"
