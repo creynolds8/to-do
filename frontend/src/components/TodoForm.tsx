@@ -42,6 +42,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
       console.error('Error adding todo', error);
     }
   }
+  
   return (
     <div className="container my-4 flex flex-col items-center">
       <h2>{todo ? "Update Todo" : "Add Todo"}</h2>
@@ -66,15 +67,15 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
           maxLength={100}
           rows={3}
         />
-        <div className="flex">
+        <div className="flex items-center">
+          <label htmlFor="priority-checkbox">Priority task:</label>
           <input
-            className="me-4"
+            className={`ms-4 w-4 h-4 ${priority ? 'accent-red-500' : ''}`}
             type="checkbox"
             name="priority-checkbox"
             checked={priority}
             onChange={(e) => setPriority(e.target.checked)}
             />
-          <label htmlFor="priority-checkbox">Priority task?</label>
         </div>
         <button
           className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600"

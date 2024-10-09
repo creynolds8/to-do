@@ -35,7 +35,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
         <div className="flex items-center gap-4">
           {todo.message && <span className="italics lg:text-base">More info</span>}
           <Link to={`/todos/${todo.id}`} className="">
-            <img src="/three-dots.svg" alt="View" width="16px" className="hover-enlarge" />
+            <img src="/three-dots.svg" alt="View" width="16px" className="hover-enlarge lg:w-6" />
           </Link>
         </div>
       </div>
@@ -48,7 +48,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
           }
           </span>
         </span>
-        {todo.priority && <>!</>}
+        {todo.priority && <><img src="/priority.svg" alt="!" width="16px" className="lg:w-6" /></>}
       </div>
     </li>
   )

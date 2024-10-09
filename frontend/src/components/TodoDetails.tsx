@@ -70,7 +70,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
   return (
     <div className="relative">
     <Link to={'/todos'}>
-      <img src="/back-arrow.svg" alt="Back" width='20px' className="hover-enlarge"/>
+      <img src="/back-arrow.svg" alt="Back" width='20px' className="hover-enlarge lg:w-6"/>
     </Link>
     {isEditing ? (
       <>
@@ -92,19 +92,22 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
           <div className="w-full flex justify-between">
             <h1 className="text-2xl">{todo.title}</h1>
             <button onClick={() => setIsEditing(true)}>
-              <img src="/edit.svg" alt="Edit" width="20px" className="hover-enlarge" />
+              <img src="/edit.svg" alt="Edit" width="20px" className="hover-enlarge lg:w-8" />
             </button>
           </div>
         </div>
         <div className="flex flex-col mt-2">
-          <span className="text-sm">Status:
-            <span className="ms-2">
-              {todo.completed ?
-              <span className="text-green-600">Completed</span> :
-              <span className="text-gray-400">Pending</span>
+          <div className="flex justify-between">
+            <span className="text-sm">Status:
+              <span className="ms-2">
+                {todo.completed ?
+                <span className="text-green-600">Completed</span> :
+                <span className="text-gray-400">Pending</span>
               }
+              </span>
             </span>
-          </span>
+            {todo.priority && <><img src="/priority.svg" alt="!" width="20px" className="lg:w-8" /></>}
+          </div>
           <span className="text-sm md:text-base">Created at: {formattedTime}, {formattedDate}</span>
           <span className="underline underline-offset-2 text-lg mt-4">Additional Info:</span>
           <span>{todo.message}</span>
