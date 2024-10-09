@@ -16,9 +16,9 @@ app.use(cors());
 
 app.use(express.json());
 
-//get all todos
+//get all *ACTIVE* todos
 app.get('/api/todos', async (req: Request, res: Response) => {
-  const queryString = "SELECT * FROM todos ORDER BY created_at DESC;";
+  const queryString = "SELECT * FROM todos WHERE active = TRUE ORDER BY created_at DESC;";
   try {
     const result = await query(queryString);
     res.json(result.rows);
