@@ -5,6 +5,7 @@ interface Todo {
   id: number;
   title: string;
   message: string;
+  priority: boolean;
   completed: boolean;
 }
 
@@ -38,14 +39,17 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
           </Link>
         </div>
       </div>
-      <span className="max-[350px]:text-xs text-sm lg:text-base">Status:
+      <div className="flex items-center justify-between">
+        <span className="max-[350px]:text-xs text-sm lg:text-base">Status:
           <span className="ms-2">
             {todo.completed ?
             <span className="text-green-600">Completed</span> :
             <span className="text-gray-400">Pending</span>
-            }
+          }
           </span>
         </span>
+        {todo.priority && <>!</>}
+      </div>
     </li>
   )
 }

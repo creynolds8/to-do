@@ -12,6 +12,7 @@ interface Todo {
   id: number;
   title: string;
   message: string;
+  priority: boolean;
   completed: boolean;
 }
 
@@ -35,7 +36,7 @@ const App: React.FC = () => {
   }, []);
 
   // Handle new Todo 
-  const handleTodoAdded = (todo: {id: number, title: string, message:string, completed: boolean}) => {
+  const handleTodoAdded = (todo: {id: number, title: string, message: string, priority: boolean, completed: boolean}) => {
     setTodos([todo, ...todos])
     
   }

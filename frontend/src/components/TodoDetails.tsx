@@ -8,6 +8,7 @@ interface Todo {
   id: number;
   title: string;
   message: string;
+  priority: boolean;
   completed: boolean;
   created_at: string;
 }

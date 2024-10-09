@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface TodoFormProps {
-  todo?: { id: number; title: string; message:string; completed: boolean;};
-  onSubmit: (todo: { id: number; title: string; message: string; completed: boolean }) => void
+  todo?: { id: number; title: string; message: string; priority: boolean; completed: boolean };
+  onSubmit: (todo: { id: number; title: string; message: string; priority: boolean; completed: boolean }) => void
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
