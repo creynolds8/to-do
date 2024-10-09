@@ -8,7 +8,9 @@ interface Todo {
   id: number;
   title: string;
   message: string;
+  priority: boolean;
   completed: boolean;
+  created_at: string;
 }
 
 interface TodoDetailProps {
@@ -47,16 +49,21 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
     setTodo((prevTodo) => prevTodo ? { ... prevTodo, title: updatedTitle, message: updatedMessage} : null)
   }
 
-
+  
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedCompleted = e.target.checked;   
     onToggleComplete(todo.id, updatedCompleted);
     setTodo((prevTodo) => prevTodo ? {...prevTodo, completed: updatedCompleted} : null);
   };
+  
+  const d = new Date(Date.parse(todo.created_at));
+  const formattedDate = d.toLocaleDateString();
+  const formattedTime = d.toLocaleTimeString();
+  
 
   return (
     <div className="relative">
-    <Link to={'/'}>
+    <Link to={'/todos'}>
       <img src="/back-arrow.svg" alt="Back" width='20px' className="hover-enlarge"/>
     </Link>
     {isEditing ? (
@@ -70,6 +77,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
       <div className="mt-8">
         <div className="flex items-center">
           <input
+          name="todo-checkbox"
           className={`me-4 w-4 h-4 ${todo.completed ? "accent-green-600" : ""}`}
           type="checkbox"
           checked={todo.completed}
@@ -82,17 +90,18 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
             </button>
           </div>
         </div>
-        <span className="text-sm">Status:
-          <span className="ms-2">
-            {todo.completed ?
-            <span className="text-green-600">Completed</span> :
-            <span className="text-gray-400">Pending</span>
-            }
+        <div className="flex flex-col mt-2">
+          <span className="text-sm">Status:
+            <span className="ms-2">
+              {todo.completed ?
+              <span className="text-green-600">Completed</span> :
+              <span className="text-gray-400">Pending</span>
+              }
+            </span>
           </span>
-        </span>      
-        <div className="flex flex-col mt-4">
-          <span className="underline underline-offset-2 text-lg">Additional Info:</span>
-          <span className="text-sm md:text-base">{todo.message}</span>
+          <span className="text-sm md:text-base">Created at: {formattedTime}, {formattedDate}</span>
+          <span className="underline underline-offset-2 text-lg mt-4">Additional Info:</span>
+          <span>{todo.message}</span>
         </div>
       </div>
     )}
