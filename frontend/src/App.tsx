@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
@@ -17,6 +17,7 @@ interface Todo {
 
 const App: React.FC = () => {
   const [ todos, setTodos ] = useState<Todo[]>([]);
+  const [ error, setError ] = useState<string>("");
 
   const fetchTodos = async () => {
     try {
@@ -24,7 +25,7 @@ const App: React.FC = () => {
       setTodos(response.data);
     } catch (error) {
       console.error('Error fetching Todos', error);
-      
+      setError("Sorry, there was an error fetching todos.")
     }
   };
 
@@ -69,15 +70,25 @@ const App: React.FC = () => {
 
   return (
     <div className="container mt-8 max-w-screen-md mx-auto lg:text-xl">
-
+      <>{error}</>
       <Router>
         <Routes>
           <Route path="/"
             element={
+              <>
+                <div>
+                  <h1>Welcome</h1>
+                  <Link to={"/todos"}>Todos</Link>
+                </div>
+              </>
+            }
+          />
+          <Route path="/todos"
+            element={
               <div className="mx-auto flex flex-col items-center">
                 <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
                 <TodoForm onSubmit={handleTodoAdded} />
-                <TodoList todos={todos} onToggleComplete={handleToggleComplete}/>
+                {!(todos.length === 0) && <TodoList todos={todos} onToggleComplete={handleToggleComplete}/> }
               </div>
             } 
           />

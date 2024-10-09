@@ -23,6 +23,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
       <div className="flex items-center justify-between">
         <div>
           <input
+            name="todo-checkbox"
             className={`me-4 w-4 h-4 ${todo.completed ? "accent-green-600" : ""}`}
             type="checkbox"
             checked={todo.completed}
