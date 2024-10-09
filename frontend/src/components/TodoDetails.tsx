@@ -15,7 +15,7 @@ interface Todo {
 
 interface TodoDetailProps {
   onToggleComplete: (id: number, completed: boolean) => void;
-  onUpdateTodo: (id: number, title: string, message: string) => void;
+  onUpdateTodo: (id: number, title: string, message: string, priority: boolean) => void;
 }
 
 const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo }) => {
@@ -39,14 +39,20 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
     return <div>Loading...</div>;
   }
 
-  const handleUpdate = async (todo: {id: number, title: string, message: string}) => {
+  const handleUpdate = async (todo: {id: number, title: string, message: string, priority: boolean}) => {
     if (!todo) return;
 
     const updatedTitle = todo.title
     const updatedMessage = todo.message
-    onUpdateTodo(todo.id, updatedTitle, updatedMessage);
+    const updatedPriority = todo.priority
+    onUpdateTodo(todo.id, updatedTitle, updatedMessage, updatedPriority);
     setIsEditing(false);
-    setTodo((prevTodo) => prevTodo ? { ... prevTodo, title: updatedTitle, message: updatedMessage} : null)
+    setTodo((prevTodo) => prevTodo ? {
+      ...prevTodo,
+      title: updatedTitle,
+      message: updatedMessage,
+      priority: updatedPriority
+    } : null)
   }
 
   

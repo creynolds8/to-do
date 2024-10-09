@@ -56,12 +56,17 @@ const App: React.FC = () => {
     }
   };
 
-  const handleUpdateTodo = async (id: number, title: string, message: string) => {
+  const handleUpdateTodo = async (id: number, title: string, message: string, priority: boolean) => {
     try {
-      const response = await axios.put(`/api/todos/${id}`, { title, message });      
+      const response = await axios.put(`/api/todos/${id}`, { title, message, priority });      
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
-          todo.id === id ? { ...todo, title: response.data.title, message: response.data.message} : todo
+          todo.id === id ? { 
+            ...todo,
+            title: response.data.title,
+            message: response.data.message,
+            priority: response.data.priority
+          } : todo
         )
       );
     } catch (error) {

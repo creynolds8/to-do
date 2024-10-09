@@ -41,10 +41,10 @@ app.get('/api/todos/:id', async (req: Request, res: Response) => {
 
 // add new todo 
 app.post('/api/todos', async (req: Request, res: Response) => {
-  const { title, message } = req.body as { title: string, message: string };
-  const queryString = "INSERT INTO todos (title, message) VALUES ($1, $2) RETURNING *;";
+  const { title, message, priority } = req.body as { title: string, message: string, priority: boolean };
+  const queryString = "INSERT INTO todos (title, message, priority) VALUES ($1, $2, $3) RETURNING *;";
   try {
-    const result = await query(queryString, [title, message]);
+    const result = await query(queryString, [title, message, priority]);    
     res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error("Error adding todo", err);
@@ -64,13 +64,14 @@ app.patch('/api/todos/:id', async (req: Request, res: Response) => {
   };
 });
 
+// update todo from form in todo details
 app.put('/api/todos/:id', async (req: Request, res: Response)=> {
   const { id } = req.params;  
-  const { title, message } = req.body as { title: string, message: string };  
-  const queryString = "UPDATE todos SET title = $1, message = $2 WHERE id = $3 RETURNING *;";
+  const { title, message, priority } = req.body as { title: string, message: string, priority: boolean };  
+  const queryString = "UPDATE todos SET title = $1, message = $2, priority = $3 WHERE id = $4 RETURNING *;";
 
   try {
-    const result = await query(queryString, [title, message, id]);
+    const result = await query(queryString, [title, message, priority, id]);
     res.status(200).json(result.rows[0]);
   } catch (err) {
     console.error("Error updating todo", err);

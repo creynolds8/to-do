@@ -9,6 +9,7 @@ interface TodoFormProps {
 const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
   const [title, setTitle] = useState<string>(todo ? todo.title : "");
   const [message, setMessage] = useState<string>(todo ? todo.message : "");
+  const [priority, setPriority] = useState<boolean>(todo? todo.priority : false)
 
   useEffect(() => {
     if (todo) {
@@ -27,13 +28,14 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
     try {
       // if todo is not set, info will be posted as a new todo
       if (!todo) {
-        const response = await axios.post('/api/todos', { title, message });        
+        const response = await axios.post('/api/todos', { title, message, priority });        
         onSubmit({ ...response.data });        
         setTitle('');
         setMessage('');
+        setPriority(false)
       // otherwise info is used to update the todo
       } else {        
-        const response = await axios.put(`/api/todos/${todo.id}`, { title, message })        
+        const response = await axios.put(`/api/todos/${todo.id}`, { title, message, priority })        
         onSubmit({ ...response.data })
       }
     } catch (error) {
@@ -54,7 +56,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
           maxLength={20}
           autoFocus
           required
-          />
+        />
         <textarea
           className="p-1 border-2 rounded outline-gray-400"
           name="message"
@@ -63,7 +65,17 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
           placeholder="Additional Info..."
           maxLength={100}
           rows={3}
-          />
+        />
+        <div className="flex">
+          <input
+            className="me-4"
+            type="checkbox"
+            name="priority-checkbox"
+            checked={priority}
+            onChange={(e) => setPriority(e.target.checked)}
+            />
+          <label htmlFor="priority-checkbox">Priority task?</label>
+        </div>
         <button
           className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600"
           type="submit"
