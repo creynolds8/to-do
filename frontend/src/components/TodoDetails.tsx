@@ -70,12 +70,12 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
   return (
     <div className="relative">
     <Link to={'/todos'}>
-      <img src="/back-arrow.svg" alt="Back" width='20px' className="hover-enlarge lg:w-6"/>
+      <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/back-arrow.svg" alt="Back" width='20px' className="hover-enlarge lg:w-6"/>
     </Link>
     {isEditing ? (
       <>
         <button className="absolute top-0 right-0" onClick={() => setIsEditing(false)}>
-          <img src="/cancel.svg" alt="Cancel" width='20px' className="hover-enlarge" />
+          <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/cancel.svg" alt="Cancel" width='20px' className="hover-enlarge" />
         </button>
         <TodoForm todo={todo} onSubmit={handleUpdate} />
       </>
@@ -92,7 +92,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
           <div className="w-full flex justify-between">
             <h1 className="text-2xl">{todo.title}</h1>
             <button onClick={() => setIsEditing(true)}>
-              <img src="/edit.svg" alt="Edit" width="20px" className="hover-enlarge lg:w-8" />
+              <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/edit.svg" alt="Edit" width="20px" className="hover-enlarge lg:w-8" />
             </button>
           </div>
         </div>
@@ -106,7 +106,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
               }
               </span>
             </span>
-            {todo.priority && <><img src="/priority.svg" alt="!" width="20px" className="lg:w-8" /></>}
+            {todo.priority && <><img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/priority.svg" alt="!" width="20px" className="lg:w-8" /></>}
           </div>
           <span className="text-sm md:text-base">Created at: {formattedTime}, {formattedDate}</span>
           <span className="underline underline-offset-2 text-lg mt-4">Additional Info:</span>
