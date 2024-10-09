@@ -1,7 +1,6 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-// @ts-expect-error
-import {query} from '../database/db.ts';
+import { query } from '../database/db';
 
 const app = express();
 const PORT = 8000;
