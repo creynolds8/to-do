@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "backend": "npx nodemon src/index.ts"
+    "backend": "npx nodemon src/index.ts",
+    "reset": "psql -U cam -f /Users/cam/coding-projects/to-do/backend/database/01_schema.sql"
+    
   },
   "keywords": [],
   "author": "",
@@ -12,7 +14,8 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.0"
+    "express": "^4.21.0",
+    "pg": "^8.13.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",

@@ -9,6 +9,7 @@ interface Todo {
   title: string;
   message: string;
   completed: boolean;
+  created_at: any;
 }
 
 interface TodoDetailProps {
@@ -92,6 +93,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
         </span>      
         <div className="flex flex-col mt-4">
           <span className="underline underline-offset-2 text-lg">Additional Info:</span>
+          <span className="text-sm md:text-base">Created at: {todo.created_at.toString()}</span>
           <span className="text-sm md:text-base">{todo.message}</span>
         </div>
       </div>
