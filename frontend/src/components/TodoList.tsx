@@ -25,7 +25,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onToggleComplete }) => {
   })
   return (
     <div className="container">
-      <ul className="p-4 border-2 rounded outline-gray-400 flex flex-col gap-4">
+      <ul className="p-2 border-2 rounded outline-gray-400 flex flex-col gap-2 max-[350px]:text-xs">
         {todoComponents}
       </ul>
     </div>
