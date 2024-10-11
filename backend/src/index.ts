@@ -54,11 +54,21 @@ app.post('/api/todos', async (req: Request, res: Response) => {
 // update completed status based on checkbox input 
 app.patch('/api/todos/:id', async (req: Request, res: Response) => {  
   const { id } = req.params;  
-  const { completed } = req.body as { completed: boolean };  
-  const queryString = "UPDATE todos SET completed = $1 WHERE id = $2;";
+  const { completed, active } = req.body as { completed: boolean, active: boolean };
+  let queryString = "";
+  let data;  
+  if (typeof completed !== 'undefined') {
+    queryString = "UPDATE todos SET completed = $1 WHERE id = $2;";
+    data = completed;
+  }
+  if (typeof active !== 'undefined') {    
+    queryString = "UPDATE todos SET active = $1 WHERE id = $2;";
+    data = active;
+  }
   try {
-    const result = await query(queryString, [completed, id]);
-    res.status(201).json(result.rows[0]);
+    await query(queryString, [data, id]);    
+    const result = await query("SELECT * FROM todos WHERE active = true ORDER BY created_at DESC;");
+    res.json(result.rows);
   } catch (err) {
     console.error("Error completing todo", err);
   };

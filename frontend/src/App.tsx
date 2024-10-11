@@ -40,19 +40,15 @@ const App: React.FC = () => {
   // Handle new Todo 
   const handleTodoAdded = (todo: {id: number, title: string, message: string, priority: boolean, completed: boolean}) => {
     setTodos([todo, ...todos])
-    
   }
 
-  const handleToggleComplete = async (id:number, completed: boolean) => {    
-        
-    try {      
-      await axios.patch(`/api/todos/${id}`, { completed });
-
-      setTodos((prevTodos) =>         
+  const handleToggleComplete = async (id: number, completed: boolean) => {    
+      try {      
+        await axios.patch(`/api/todos/${id}`, { completed });
+        setTodos((prevTodos) =>         
         prevTodos.map((todo) => 
           todo.id === id ? { ...todo, completed } : todo
-        )
-      )
+      ))
     } catch (error) {
       console.error('Error completing todo', error)
     }
@@ -73,6 +69,19 @@ const App: React.FC = () => {
       );
     } catch (error) {
       console.error('Error updating todo', error);
+    }
+  };
+
+  const handleDeleteTodo = async (id: number, active: boolean) => {
+    if (confirm("WARNING! This action is permamnent and cannot be undone. Are you sure you wish to delete this todo?")) {
+      try {
+        const response = await axios.patch(`/api/todos/${id}`, { active });
+        setTodos([...response.data])
+        alert('Todo successfully deleted.')     
+      } catch (error) {
+        console.error('Error deleting todo', error)
+        setError("Sorry, there was an error deleting the todo.")
+      }
     }
   };
 
@@ -124,6 +133,7 @@ const App: React.FC = () => {
                 <TodoDetails 
                 onToggleComplete={handleToggleComplete}
                 onUpdateTodo={handleUpdateTodo}
+                onDeleteTodo={handleDeleteTodo}
                 />
               </>
             }

@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -16,12 +16,14 @@ interface Todo {
 interface TodoDetailProps {
   onToggleComplete: (id: number, completed: boolean) => void;
   onUpdateTodo: (id: number, title: string, message: string, priority: boolean) => void;
+  onDeleteTodo: (id: number, active: boolean) => void
 }
 
-const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo }) => {
+const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo, onDeleteTodo }) => {
   const { id } = useParams<{ id: string }>();
   const [todo, setTodo] = useState<Todo | null>(null);
   const [isEditing, setIsEditing] = useState(false);
+  const navigate = useNavigate();
   
   useEffect(() => {
     const fetchTodo = async () => {
@@ -61,6 +63,17 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
     onToggleComplete(todo.id, updatedCompleted);
     setTodo((prevTodo) => prevTodo ? {...prevTodo, completed: updatedCompleted} : null);
   };
+
+  const handleDelete = async (id: number, active: boolean) => {
+    const updatedActive = active
+    onDeleteTodo(id, updatedActive)
+    setTodo((prevTodo) => prevTodo ? { ...prevTodo, active: updatedActive} : null);
+    navigate('/todos');
+  };
+
+  const onDelete = () => {
+    handleDelete(todo.id, false)
+  }
   
   const d = new Date(Date.parse(todo.created_at));
   const formattedDate = d.toLocaleDateString();
@@ -74,10 +87,13 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
     </Link>
     {isEditing ? (
       <>
-        <button className="absolute top-0 right-0" onClick={() => setIsEditing(false)}>
+        <button className="absolute top-5 right-5" onClick={() => setIsEditing(false)}>
           <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/cancel.svg" alt="Cancel" width='20px' className="hover-enlarge" />
         </button>
         <TodoForm todo={todo} onSubmit={handleUpdate} />
+        <div className="w-full flex justify-center">
+          <button className="button danger hover:bg-red-500" onClick={onDelete}>Delete Todo</button>
+        </div>
       </>
     ) : (
       <div className="mt-8">

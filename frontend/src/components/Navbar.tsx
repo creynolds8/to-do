@@ -10,7 +10,7 @@ const Navbar: React.FC = () => {
           To-Done!
         </span>
           {user ? 
-          <Link to={'/'} className="button bg-red-500">
+          <Link to={'/'} className="button danger hover:bg-red-500">
             <button onClick={() => {console.log("logout")}}>
               Logout
             </button>

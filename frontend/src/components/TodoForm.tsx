@@ -3,10 +3,10 @@ import axios from "axios";
 
 interface TodoFormProps {
   todo?: { id: number; title: string; message: string; priority: boolean; completed: boolean };
-  onSubmit: (todo: { id: number; title: string; message: string; priority: boolean; completed: boolean }) => void
+  onSubmit: (todo: { id: number; title: string; message: string; priority: boolean; completed: boolean; }) => void
 }
 
-const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
+const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
   const [title, setTitle] = useState<string>(todo ? todo.title : "");
   const [message, setMessage] = useState<string>(todo ? todo.message : "");
   const [priority, setPriority] = useState<boolean>(todo? todo.priority : false)
@@ -78,7 +78,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit }) => {
             />
         </div>
         <button
-          className="w-fit my-2 py-1 px-4 border-2 rounded hover:border-green-600"
+          className="w-fit my-2 button success hover:bg-green-600"
           type="submit"
           >
           {todo ? "Update Todo" : "Add Todo"}
