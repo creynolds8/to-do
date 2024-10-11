@@ -33,7 +33,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
           {todo.title}
         </div>
         <div className="flex items-center gap-4">
-          {todo.message && <span className="italic lg:text-base">More info</span>}
+          {todo.message && <span className="italic text-xs lg:text-base">More info</span>}
           <Link to={`/todos/${todo.id}`} className="">
             <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/three-dots.svg" alt="View" width="16px" className="hover-enlarge lg:w-6" />
           </Link>
