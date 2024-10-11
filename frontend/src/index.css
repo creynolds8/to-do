@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  padding: 1rem;
-}
-
 /* :root {
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
