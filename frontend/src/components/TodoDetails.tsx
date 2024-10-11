@@ -68,7 +68,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
   
 
   return (
-    <div className="relative">
+    <div className="relative p-4">
     <Link to={'/todos'}>
       <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/back-arrow.svg" alt="Back" width='20px' className="hover-enlarge lg:w-6"/>
     </Link>
