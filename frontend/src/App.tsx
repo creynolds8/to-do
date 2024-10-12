@@ -9,6 +9,7 @@ import Index from "./components/Index";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoDetails from "./components/TodoDetails";
+import Login from "./components/Login";
 
 interface Todo {
   id: number;
@@ -18,9 +19,15 @@ interface Todo {
   completed: boolean;
 }
 
+interface User {
+  id: number;
+  email: string;
+}
+
 const App: React.FC = () => {
   const [ todos, setTodos ] = useState<Todo[]>([]);
   const [ error, setError ] = useState<string>("");
+  const [ user, setUser ] = useState<User | null >(null);
 
   const fetchTodos = async () => {
     try {
@@ -85,6 +92,14 @@ const App: React.FC = () => {
     }
   };
 
+  const handleLogin = async (user: {id: number; email: string}) => {
+    setUser({id: user.id, email: user.email});
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  }
+
   return (
     <div className="container max-w-screen-md mx-auto lg:text-xl">
       <>{error}</>
@@ -93,7 +108,7 @@ const App: React.FC = () => {
           <Route path="/"
             element={
               <>
-                <Navbar />
+                <Navbar user={user} handleLogout={handleLogout} />
                 <Index />
               </>
             }
@@ -101,15 +116,15 @@ const App: React.FC = () => {
           <Route path="/login"
             element={
               <>
-                <Navbar />
-                {/* login page component */}
+                <Navbar user={user} handleLogout={handleLogout} />
+                <Login onSubmit={handleLogin} />
               </>
             }
           />
           <Route path="/register"
             element={
               <>
-                <Navbar />
+                <Navbar user={user} handleLogout={handleLogout}/>
                 {/* register page component */}
               </>
             }
@@ -117,7 +132,7 @@ const App: React.FC = () => {
           <Route path="/todos"
             element={
               <>
-                <Navbar />
+                <Navbar user={user} handleLogout={handleLogout} />
                 <div className="mx-auto flex flex-col items-center p-4">
                   <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
                   <TodoForm onSubmit={handleTodoAdded} />
@@ -129,7 +144,7 @@ const App: React.FC = () => {
           <Route path="/todos/:id"
             element={
               <>
-                <Navbar />
+                <Navbar user={user} handleLogout={handleLogout} />
                 <TodoDetails 
                 onToggleComplete={handleToggleComplete}
                 onUpdateTodo={handleUpdateTodo}
