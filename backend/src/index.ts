@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { query } from "../database/db";
 import bcrypt from "bcryptjs";
+import cookieSession from "cookie-session";
+
 
 const app = express();
 const PORT = 8000;
@@ -17,13 +19,28 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use(cookieSession({
+  name: "userId",
+  keys: ["64321684"]
+}));
+
 // TODO ROUTES 
 
   //get all *ACTIVE* todos
   app.get("/api/todos", async (req: Request, res: Response) => {
-    const queryString = "SELECT * FROM todos WHERE active = TRUE ORDER BY created_at DESC;";
+    let userId;
+    if (req.session) {
+      userId = req.session.userId;
+    }
+    const queryString = `
+      SELECT * FROM todos 
+      JOIN todo_lists ON todos.todo_list_id = todo_lists.list_id
+      WHERE todo_lists.user_id = $1
+      AND todos.active = TRUE 
+      ORDER BY todos.created_at DESC;
+    `;
     try {
-      const result = await query(queryString);
+      const result = await query(queryString, [userId]);           
       res.json(result.rows);
     } catch (err) {
       console.error("Error fetching todos", err);
@@ -33,7 +50,7 @@ app.use(express.json());
   // get individual todo
   app.get("/api/todos/:id", async (req: Request, res: Response) => {
     const { id } = req.params;
-    const queryString = "SELECT * FROM todos WHERE id = $1;";
+    const queryString = "SELECT * FROM todos WHERE todo_id = $1;";
     try {
       const result = await query(queryString, [id]);
       res.status(200).json(result.rows[0]);
@@ -44,10 +61,14 @@ app.use(express.json());
 
   // add new todo 
   app.post("/api/todos", async (req: Request, res: Response) => {
+    let listResults;
+    if (req.session) {
+      listResults = await query("SELECT * FROM todo_lists WHERE user_id = $1;", [req.session.userId])
+    }
     const { title, message, priority } = req.body as { title: string, message: string, priority: boolean };
-    const queryString = "INSERT INTO todos (title, message, priority) VALUES ($1, $2, $3) RETURNING *;";
-    try {
-      const result = await query(queryString, [title, message, priority]);    
+    const queryString = "INSERT INTO todos (todo_title, message, priority, todo_list_id) VALUES ($1, $2, $3, $4) RETURNING *;";
+    try {      
+      const result = await query(queryString, [title, message, priority, listResults.rows[0].list_id]);    
       res.status(201).json(result.rows[0]);
     } catch (err) {
       console.error("Error adding todo", err);
@@ -61,11 +82,11 @@ app.use(express.json());
     let queryString = "";
     let data;  
     if (typeof completed !== "undefined") {
-      queryString = "UPDATE todos SET completed = $1 WHERE id = $2;";
+      queryString = "UPDATE todos SET completed = $1 WHERE todo_id = $2;";
       data = completed;
     }
     if (typeof active !== "undefined") {    
-      queryString = "UPDATE todos SET active = $1 WHERE id = $2;";
+      queryString = "UPDATE todos SET active = $1 WHERE todo_id = $2;";
       data = active;
     }
     try {
@@ -78,10 +99,10 @@ app.use(express.json());
   });
 
   // update todo from form in todo details
-  app.put("/api/todos/:id", async (req: Request, res: Response)=> {
+  app.put("/api/todos/:id", async (req: Request, res: Response) => {
     const { id } = req.params;  
     const { title, message, priority } = req.body as { title: string, message: string, priority: boolean };  
-    const queryString = "UPDATE todos SET title = $1, message = $2, priority = $3 WHERE id = $4 RETURNING *;";
+    const queryString = "UPDATE todos SET todo_title = $1, message = $2, priority = $3 WHERE todo_id = $4 RETURNING *;";
 
     try {
       const result = await query(queryString, [title, message, priority, id]);
@@ -93,22 +114,40 @@ app.use(express.json());
 
   // USER ROUTES
 
+  app.get("/api/users", async (req: Request, res: Response) => {
+
+    const queryString = "SELECT * FROM users WHERE id = $1;";
+    try {
+      if (req.session) {
+        const result = await query(queryString, [req.session.userId]);
+        res.json(result.rows[0]);
+      } else {
+        console.error("Null session");
+      };
+    } catch (error) {
+      console.error("User not found", error);
+    };
+  });
+
   app.post("/api/login", async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const queryString = "SELECT * FROM users WHERE email = $1;"
     try {
-      const result = await query(queryString, [email])      
-      if (result.rows.length > 0) {
-        const digestCheck = result.rows[0].password_digest;
-        const passwordCheck = bcrypt.compareSync(password, digestCheck);
-        if (passwordCheck) {
-          res.status(201).json(result.rows[0])
+      const result = await query(queryString, [email])
+      if (req.session) {
+        if (result.rows.length > 0) {
+          const digestCheck = result.rows[0].password_digest;
+          const passwordCheck = bcrypt.compareSync(password, digestCheck);
+          if (passwordCheck) {
+            req.session.userId = result.rows[0].id;
+            res.status(201).json(result.rows[0])
+          } else {
+            res.status(404).json("Incorrect Password.");
+          }
         } else {
-          res.status(404).json("Incorrect Password.");
-        }
-      } else {
-        res.status(404).json("User not found.");
-      }
+          res.status(404).json("User not found.");
+        };  
+      };
     } catch (error) {
       console.error("Login error", error)
       res.status(404).json(error)
@@ -123,11 +162,20 @@ app.use(express.json());
     
     try {
       const result = await query(queryString, [email, password_digest]);
-      res.status(201).json(result.rows[0]);
+      if (req.session) {
+        req.session.userId = result.rows[0].id
+        query("INSERT INTO todo_lists (user_id, list_title) VALUES ($1, $2);", [req.session.userId, "Default"])
+        res.status(201).json(result.rows[0]);
+      }
     } catch (error) {
       console.error("Error adding user to database", error);
     }
-  })
+  });
+
+  app.post("/api/logout", (req: Request, res: Response) => {    
+    req.session = null
+    res.status(201).json();
+  });
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

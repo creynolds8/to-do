@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 interface NavbarProps {
@@ -8,9 +9,14 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ user, handleLogout }) => {
   const navigate = useNavigate();
 
-  const onLogout = () => {
-    handleLogout();
-    navigate("/");
+  const onLogout = async () => {
+    try {
+      await axios.post("/api/logout");
+      handleLogout();
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging out.")
+    }
   }
   return (
     <>

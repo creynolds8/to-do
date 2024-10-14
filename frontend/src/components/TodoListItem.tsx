@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface Todo {
-  id: number;
-  title: string;
+  todo_id: number;
+  todo_title: string;
   message: string;
   priority: boolean;
   completed: boolean;
@@ -16,7 +16,7 @@ interface TodoListItemProps {
 
 const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {    
-    onToggleComplete(todo.id, e.target.checked);
+    onToggleComplete(todo.todo_id, e.target.checked);
   };
 
   return (
@@ -30,11 +30,11 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
             checked={todo.completed}
             onChange={handleChange}
             />
-          {todo.title}
+          {todo.todo_title}
         </div>
         <div className="flex items-center gap-4">
           {todo.message && <span className="italic text-xs lg:text-base">More info</span>}
-          <Link to={`/todos/${todo.id}`} className="">
+          <Link to={`/todos/${todo.todo_id}`} className="">
             <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/three-dots.svg" alt="View" width="16px" className="hover-enlarge lg:w-6" />
           </Link>
         </div>

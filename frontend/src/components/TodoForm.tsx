@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 interface TodoFormProps {
-  todo?: { id: number; title: string; message: string; priority: boolean; completed: boolean };
-  onSubmit: (todo: { id: number; title: string; message: string; priority: boolean; completed: boolean; }) => void
+  todo?: { todo_id: number; todo_title: string; message: string; priority: boolean; completed: boolean };
+  onSubmit: (todo: { todo_id: number; todo_title: string; message: string; priority: boolean; completed: boolean; }) => void
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
-  const [title, setTitle] = useState<string>(todo ? todo.title : "");
+  const [title, setTitle] = useState<string>(todo ? todo.todo_title : "");
   const [message, setMessage] = useState<string>(todo ? todo.message : "");
   const [priority, setPriority] = useState<boolean>(todo? todo.priority : false)
 
   useEffect(() => {
     if (todo) {
-      setTitle(todo.title);
+      setTitle(todo.todo_title);
       setMessage(todo.message)
     }
   },[todo])
@@ -35,7 +35,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
         setPriority(false)
       // otherwise info is used to update the todo
       } else {        
-        const response = await axios.put(`/api/todos/${todo.id}`, { title, message, priority })        
+        const response = await axios.put(`/api/todos/${todo.todo_id}`, { title, message, priority })        
         onSubmit({ ...response.data })
       }
     } catch (error) {
