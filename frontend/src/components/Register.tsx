@@ -12,6 +12,7 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -40,10 +41,10 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
       {error}
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-xl">Register:</h1>
-        <form className="flex flex-col gap-2" onSubmit={handleRegister}>
+        <form className="flex flex-col gap-2" onSubmit={handleRegister} >
           <input
             className="p-1 border-2 rounded outline-gray-400"
-            type="text"
+            type="email"
             name="email"
             placeholder="Email"
             value={email}
@@ -51,7 +52,7 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
           />
           <input
             className="p-1 border-2 rounded outline-gray-400"
-            type="text"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             value={password}
@@ -59,12 +60,16 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
           />
           <input
             className="p-1 border-2 rounded outline-gray-400"
-            type="text"
+            type={showPassword ? "text" : "password"}
             name="passwordconfirm"
             placeholder="Re-type Password"
             value={passwordConfirm}
             onChange={e => setPasswordConfirm(e.target.value)}  
           />
+          <div>
+            <input className="me-2" type="checkbox" name="showPassword" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
+            <label htmlFor="showPassword">Show Password</label>
+          </div>
           <button className="button success" type="submit">Register!</button>
         </form>
       </div>
