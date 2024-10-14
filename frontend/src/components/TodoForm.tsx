@@ -22,16 +22,16 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
     e.preventDefault();
     // check for only white space inputs
     if (!title.trim()) {
-      alert('Please add a valid title.') 
+      alert("Please add a valid title.") 
       return;
     }
     try {
       // if todo is not set, info will be posted as a new todo
       if (!todo) {
-        const response = await axios.post('/api/todos', { title, message, priority });        
+        const response = await axios.post("/api/todos", { title, message, priority });        
         onSubmit({ ...response.data });        
-        setTitle('');
-        setMessage('');
+        setTitle("");
+        setMessage("");
         setPriority(false)
       // otherwise info is used to update the todo
       } else {        
@@ -39,7 +39,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
         onSubmit({ ...response.data })
       }
     } catch (error) {
-      console.error('Error adding todo', error);
+      console.error("Error adding todo", error);
     }
   }
   
@@ -70,7 +70,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
         <div className="flex items-center">
           <label htmlFor="priority-checkbox">Priority task:</label>
           <input
-            className={`ms-4 w-4 h-4 ${priority ? 'accent-red-500' : ''}`}
+            className={`ms-4 w-4 h-4 ${priority ? "accent-red-500" : ""}`}
             type="checkbox"
             name="priority-checkbox"
             checked={priority}

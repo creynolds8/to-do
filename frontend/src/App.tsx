@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "../src/App.css";
@@ -32,10 +32,10 @@ const App: React.FC = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get('/api/todos');
+      const response = await axios.get("/api/todos");
       setTodos(response.data);
     } catch (error) {
-      console.error('Error fetching Todos', error);
+      console.error("Error fetching Todos", error);
       setError("Sorry, there was an error fetching todos.")
     }
   };
@@ -58,7 +58,7 @@ const App: React.FC = () => {
           todo.id === id ? { ...todo, completed } : todo
       ))
     } catch (error) {
-      console.error('Error completing todo', error)
+      console.error("Error completing todo", error)
     }
   };
 
@@ -76,7 +76,7 @@ const App: React.FC = () => {
         )
       );
     } catch (error) {
-      console.error('Error updating todo', error);
+      console.error("Error updating todo", error);
     }
   };
 
@@ -85,9 +85,9 @@ const App: React.FC = () => {
       try {
         const response = await axios.patch(`/api/todos/${id}`, { active });
         setTodos([...response.data])
-        alert('Todo successfully deleted.')     
+        alert("Todo successfully deleted.")     
       } catch (error) {
-        console.error('Error deleting todo', error)
+        console.error("Error deleting todo", error)
         setError("Sorry, there was an error deleting the todo.")
       }
     }

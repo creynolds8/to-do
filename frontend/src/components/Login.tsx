@@ -15,11 +15,11 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {      
-      const response = await axios.post('/api/login', { email, password });      
+      const response = await axios.post("/api/login", { email, password });      
       onSubmit({...response.data});
       setEmail("");
       setPassword("");
-      navigate('/todos')
+      navigate("/todos")
     } catch (error) {
       console.error("Error submitting form", error)
       setError(`Sorry, there was an error logging in. 

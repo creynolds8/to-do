@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface RegisterProps {
   onSubmit: (user: {id: number; email: string}) => void
@@ -11,20 +12,26 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
   const [password, setPassword] = useState<string>("");
   const [passwordConfirm, setPasswordConfirm] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleRegister = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post('/api/register', {email, password});
-      onSubmit({...response.data})
-      setEmail("");
-      setPassword("");
-      setPasswordConfirm("");
-      setError("");
-    } catch (error) {
-      console.error("Error registering user")
-      setError("There was an error registering a new user")
+    if (password === passwordConfirm) {
+      try {        
+        const response = await axios.post("/api/register", {email, password});
+        onSubmit({...response.data})
+        setEmail("");
+        setPassword("");
+        setPasswordConfirm("");
+        setError("");
+        navigate("/todos");
+      } catch (error) {
+        console.error("Error registering user");
+        setError("There was an error registering a new user");
+      };
+    } else {
+      setError("Passwords must match. Please double-check and try again.");
     }
   };
 
