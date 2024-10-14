@@ -10,7 +10,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, handleLogout }) => {
 
   const onLogout = () => {
     handleLogout();
-    navigate('/');
+    navigate("/");
   }
   return (
     <>
@@ -21,14 +21,14 @@ const Navbar: React.FC<NavbarProps> = ({ user, handleLogout }) => {
           {user ?
           <>
             {user.id} {user.email}
-            <Link to={'/'} className="button danger hover:bg-red-500">
+            <Link to={"/"} className="button danger hover:bg-red-500">
               <button onClick={onLogout}>
                 Logout
               </button>
             </Link> 
           </>
           :
-          <Link to={'/login'} className="button bg-green-500">Login</Link>}  
+          <Link to={"/login"} className="button bg-green-500">Login</Link>}  
       </nav>
     </>
   );

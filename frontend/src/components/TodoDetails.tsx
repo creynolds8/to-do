@@ -31,7 +31,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
         const response = await axios.get(`/api/todos/${id}`);        
         setTodo(response.data);
       } catch (error) {
-        console.error('Error fetching todo', error);
+        console.error("Error fetching todo", error);
       }
     };
     fetchTodo();
@@ -68,7 +68,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
     const updatedActive = active
     onDeleteTodo(id, updatedActive)
     setTodo((prevTodo) => prevTodo ? { ...prevTodo, active: updatedActive} : null);
-    navigate('/todos');
+    navigate("/todos");
   };
 
   const onDelete = () => {
@@ -82,13 +82,13 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
 
   return (
     <div className="relative p-4">
-    <Link to={'/todos'}>
-      <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/back-arrow.svg" alt="Back" width='20px' className="hover-enlarge lg:w-6"/>
+    <Link to={"/todos"}>
+      <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/back-arrow.svg" alt="Back" width="20px" className="hover-enlarge lg:w-6"/>
     </Link>
     {isEditing ? (
       <>
         <button className="absolute top-5 right-5" onClick={() => setIsEditing(false)}>
-          <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/cancel.svg" alt="Cancel" width='20px' className="hover-enlarge" />
+          <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/cancel.svg" alt="Cancel" width="20px" className="hover-enlarge" />
         </button>
         <TodoForm todo={todo} onSubmit={handleUpdate} />
         <div className="w-full flex justify-center">

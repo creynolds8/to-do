@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "../src/App.css";
@@ -10,6 +10,7 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoDetails from "./components/TodoDetails";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 interface Todo {
   id: number;
@@ -31,10 +32,10 @@ const App: React.FC = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get('/api/todos');
+      const response = await axios.get("/api/todos");
       setTodos(response.data);
     } catch (error) {
-      console.error('Error fetching Todos', error);
+      console.error("Error fetching Todos", error);
       setError("Sorry, there was an error fetching todos.")
     }
   };
@@ -57,7 +58,7 @@ const App: React.FC = () => {
           todo.id === id ? { ...todo, completed } : todo
       ))
     } catch (error) {
-      console.error('Error completing todo', error)
+      console.error("Error completing todo", error)
     }
   };
 
@@ -75,7 +76,7 @@ const App: React.FC = () => {
         )
       );
     } catch (error) {
-      console.error('Error updating todo', error);
+      console.error("Error updating todo", error);
     }
   };
 
@@ -84,21 +85,25 @@ const App: React.FC = () => {
       try {
         const response = await axios.patch(`/api/todos/${id}`, { active });
         setTodos([...response.data])
-        alert('Todo successfully deleted.')     
+        alert("Todo successfully deleted.")     
       } catch (error) {
-        console.error('Error deleting todo', error)
+        console.error("Error deleting todo", error)
         setError("Sorry, there was an error deleting the todo.")
       }
     }
   };
 
   const handleLogin = async (user: {id: number; email: string}) => {
-    setUser({id: user.id, email: user.email});
+    setUser(user);
   };
 
   const handleLogout = () => {
     setUser(null);
-  }
+  };
+
+  const handleRegister = async (user: {id: number; email: string}) => {
+    setUser(user)
+  };
 
   return (
     <div className="container max-w-screen-md mx-auto lg:text-xl">
@@ -125,7 +130,7 @@ const App: React.FC = () => {
             element={
               <>
                 <Navbar user={user} handleLogout={handleLogout}/>
-                {/* register page component */}
+                <Register onSubmit={handleRegister} />
               </>
             }
           />
