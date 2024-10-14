@@ -10,6 +10,7 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import TodoDetails from "./components/TodoDetails";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 interface Todo {
   id: number;
@@ -93,12 +94,16 @@ const App: React.FC = () => {
   };
 
   const handleLogin = async (user: {id: number; email: string}) => {
-    setUser({id: user.id, email: user.email});
+    setUser(user);
   };
 
   const handleLogout = () => {
     setUser(null);
-  }
+  };
+
+  const handleRegister = async (user: {id: number; email: string}) => {
+    setUser(user)
+  };
 
   return (
     <div className="container max-w-screen-md mx-auto lg:text-xl">
@@ -125,7 +130,7 @@ const App: React.FC = () => {
             element={
               <>
                 <Navbar user={user} handleLogout={handleLogout}/>
-                {/* register page component */}
+                <Register onSubmit={handleRegister} />
               </>
             }
           />
