@@ -2,8 +2,8 @@ import React from "react";
 import TodoListItem from "./TodoListItem";
 
 interface Todo {
-  id: number;
-  title: string;
+  todo_id: number;
+  todo_title: string;
   message: string;
   priority: boolean;
   completed: boolean;
@@ -18,7 +18,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onToggleComplete }) => {
   const todoComponents = todos.map(todo => {
     return (
       <TodoListItem
-      key={todo.id}
+      key={todo.todo_id}
       todo={todo}
       onToggleComplete={onToggleComplete}
       />

@@ -13,8 +13,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 
 interface Todo {
-  id: number;
-  title: string;
+  todo_id: number;
+  todo_title: string;
   message: string;
   priority: boolean;
   completed: boolean;
@@ -49,15 +49,15 @@ const App: React.FC = () => {
       setError("There was an error fetching user information. Please try again.")
     }
   }
-
+  
   // useEffect, when passed an empty array will run only once when the page finishes loading
   useEffect(() => {
-    fetchTodos();
     fetchUser();
+    fetchTodos();
   }, []);
 
   // Handle new Todo 
-  const handleTodoAdded = (todo: {id: number, title: string, message: string, priority: boolean, completed: boolean}) => {
+  const handleTodoAdded = (todo: {todo_id: number, todo_title: string, message: string, priority: boolean, completed: boolean}) => {
     setTodos([todo, ...todos])
   }
 
@@ -66,7 +66,7 @@ const App: React.FC = () => {
         await axios.patch(`/api/todos/${id}`, { completed });
         setTodos((prevTodos) =>         
         prevTodos.map((todo) => 
-          todo.id === id ? { ...todo, completed } : todo
+          todo.todo_id === id ? { ...todo, completed } : todo
       ))
     } catch (error) {
       console.error("Error completing todo", error)
@@ -78,7 +78,7 @@ const App: React.FC = () => {
       const response = await axios.put(`/api/todos/${id}`, { title, message, priority });      
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
-          todo.id === id ? { 
+          todo.todo_id === id ? { 
             ...todo,
             title: response.data.title,
             message: response.data.message,
@@ -106,10 +106,12 @@ const App: React.FC = () => {
 
   const handleLogin = async (user: {id: number; email: string}) => {
     setUser(user);
+    fetchTodos();
   };
 
   const handleLogout = async () => {
     setUser(null);
+    setTodos([]);
   };
 
   const handleRegister = async (user: {id: number; email: string}) => {

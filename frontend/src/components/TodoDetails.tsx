@@ -5,8 +5,8 @@ import axios from "axios";
 import TodoForm from "./TodoForm";
 
 interface Todo {
-  id: number;
-  title: string;
+  todo_id: number;
+  todo_title: string;
   message: string;
   priority: boolean;
   completed: boolean;
@@ -15,7 +15,7 @@ interface Todo {
 
 interface TodoDetailProps {
   onToggleComplete: (id: number, completed: boolean) => void;
-  onUpdateTodo: (id: number, title: string, message: string, priority: boolean) => void;
+  onUpdateTodo: (id: number, todo_title: string, message: string, priority: boolean) => void;
   onDeleteTodo: (id: number, active: boolean) => void
 }
 
@@ -41,17 +41,17 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
     return <div>Loading...</div>;
   }
 
-  const handleUpdate = async (todo: {id: number, title: string, message: string, priority: boolean}) => {
+  const handleUpdate = async (todo: {todo_id: number, todo_title: string, message: string, priority: boolean}) => {
     if (!todo) return;
 
-    const updatedTitle = todo.title
+    const updatedTitle = todo.todo_title
     const updatedMessage = todo.message
     const updatedPriority = todo.priority
-    onUpdateTodo(todo.id, updatedTitle, updatedMessage, updatedPriority);
+    onUpdateTodo(todo.todo_id, updatedTitle, updatedMessage, updatedPriority);
     setIsEditing(false);
     setTodo((prevTodo) => prevTodo ? {
       ...prevTodo,
-      title: updatedTitle,
+      todo_title: updatedTitle,
       message: updatedMessage,
       priority: updatedPriority
     } : null)
@@ -60,7 +60,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
   
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedCompleted = e.target.checked;   
-    onToggleComplete(todo.id, updatedCompleted);
+    onToggleComplete(todo.todo_id, updatedCompleted);
     setTodo((prevTodo) => prevTodo ? {...prevTodo, completed: updatedCompleted} : null);
   };
 
@@ -72,7 +72,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
   };
 
   const onDelete = () => {
-    handleDelete(todo.id, false)
+    handleDelete(todo.todo_id, false)
   }
   
   const d = new Date(Date.parse(todo.created_at));
@@ -106,7 +106,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
           onChange={handleChange}
           />
           <div className="w-full flex justify-between">
-            <h1 className="text-2xl">{todo.title}</h1>
+            <h1 className="text-2xl">{todo.todo_title}</h1>
             <button onClick={() => setIsEditing(true)}>
               <img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/edit.svg" alt="Edit" width="20px" className="hover-enlarge lg:w-8" />
             </button>
