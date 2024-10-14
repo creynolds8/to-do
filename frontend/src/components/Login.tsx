@@ -10,6 +10,8 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -35,7 +37,7 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
         <form className="flex flex-col items-center gap-2" onSubmit={handleLogin}>
           <input
             className="p-1 border-2 rounded outline-gray-400"
-            type="text"
+            type="email"
             name="email"
             placeholder="Email"
             onChange={e => setEmail(e.target.value)}
@@ -43,12 +45,16 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
           />
           <input
             className="p-1 border-2 rounded outline-gray-400"
-            type="text"
+            type={showPassword ? "text" : "password"}
             name="password"
             placeholder="Password"
             onChange={e => setPassword(e.target.value)}
             value={password}
           />
+          <div>
+            <input className="me-2" type="checkbox" name="showPassword" checked={showPassword} onChange={() => setShowPassword(!showPassword)} />
+            <label htmlFor="showPassword">Show Password</label>
+          </div>
           <button className="button success" type="submit">
             Login!
           </button>

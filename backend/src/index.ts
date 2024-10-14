@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
 import { query } from "../database/db";
+import bcrypt from "bcryptjs";
 
 const app = express();
 const PORT = 8000;
@@ -98,14 +99,15 @@ app.use(express.json());
     try {
       const result = await query(queryString, [email])      
       if (result.rows.length > 0) {
-        const passwordCheck = result.rows[0].password_digest
-        if (passwordCheck === password) {
+        const digestCheck = result.rows[0].password_digest;
+        const passwordCheck = bcrypt.compareSync(password, digestCheck);
+        if (passwordCheck) {
           res.status(201).json(result.rows[0])
         } else {
           res.status(404).json("Incorrect Password.");
         }
       } else {
-        res.status(404).json("User not found.")
+        res.status(404).json("User not found.");
       }
     } catch (error) {
       console.error("Login error", error)
@@ -116,8 +118,11 @@ app.use(express.json());
   app.post("/api/register", async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const queryString = "INSERT INTO users (email, password_digest) VALUES ($1, $2) RETURNING *;";    
+    const salt = bcrypt.genSaltSync(10);
+    const password_digest = bcrypt.hashSync(password, salt);
+    
     try {
-      const result = await query(queryString, [email, password]);
+      const result = await query(queryString, [email, password_digest]);
       res.status(201).json(result.rows[0]);
     } catch (error) {
       console.error("Error adding user to database", error);

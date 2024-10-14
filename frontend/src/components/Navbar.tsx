@@ -15,12 +15,14 @@ const Navbar: React.FC<NavbarProps> = ({ user, handleLogout }) => {
   return (
     <>
       <nav className="flex items-center justify-between px-4 py-2 mb-4 bg-gray-300">
-        <span className="text-xl">
-          To-Done!
-        </span>
+        <Link to={"/"}>
+          <span className="text-xl">
+            To-Done!
+          </span>
+        </Link>
           {user ?
           <>
-            {user.id} {user.email}
+            User Id: {user.id}
             <Link to={"/"} className="button danger hover:bg-red-500">
               <button onClick={onLogout}>
                 Logout
@@ -28,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, handleLogout }) => {
             </Link> 
           </>
           :
-          <Link to={"/login"} className="button bg-green-500">Login</Link>}  
+          <Link to={"/login"} className="button success bg-green-500">Login</Link>}  
       </nav>
     </>
   );
