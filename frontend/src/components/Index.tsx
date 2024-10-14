@@ -7,13 +7,13 @@ const Index: React.FC = () => {
         <h1 className="text-3xl">Welcome!</h1>
         <div className="text-center">
           Here at <span className="text-xl italic"> To-Done </span> our goal is to make keeping 
-          track of your tasks so easy that once they're added, they're already done!
+          track of your tasks so easy that once they"re added, they"re already done!
         </div>
         <div className="w-full justify-start">
-          <Link to={'/login'} className="button success bg-green-500">Login</Link> to view your todos
+          <Link to={"/login"} className="button success bg-green-500">Login</Link> to view your todos
         </div>
         <div className="w-full justify-start">
-          <Link to={'/register'} className="button success bg-green-500">Register</Link> to start tracking your tasks!
+          <Link to={"/register"} className="button success bg-green-500">Register</Link> to start tracking your tasks!
         </div>
         {/* <Link to={"/todos"}>*DEV* - Todos</Link> */}
       </div>
