@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import { query } from "../database/db";
 import bcrypt from "bcryptjs";
+import cookieSession from "cookie-session";
+
 
 const app = express();
 const PORT = 8000;
@@ -16,6 +18,11 @@ interface Todo {
 app.use(cors());
 
 app.use(express.json());
+
+app.use(cookieSession({
+  name: "userId",
+  keys: ["64321684"]
+}));
 
 // TODO ROUTES 
 
@@ -78,7 +85,7 @@ app.use(express.json());
   });
 
   // update todo from form in todo details
-  app.put("/api/todos/:id", async (req: Request, res: Response)=> {
+  app.put("/api/todos/:id", async (req: Request, res: Response) => {
     const { id } = req.params;  
     const { title, message, priority } = req.body as { title: string, message: string, priority: boolean };  
     const queryString = "UPDATE todos SET title = $1, message = $2, priority = $3 WHERE id = $4 RETURNING *;";
@@ -93,22 +100,40 @@ app.use(express.json());
 
   // USER ROUTES
 
+  app.get("/api/users", async (req: Request, res: Response) => {
+
+    const queryString = "SELECT * FROM users WHERE id = $1;";
+    try {
+      if (req.session) {
+        const result = await query(queryString, [req.session.userId]);
+        res.json(result.rows[0]);
+      } else {
+        console.error("Null session");
+      };
+    } catch (error) {
+      console.error("User not found", error);
+    };
+  });
+
   app.post("/api/login", async (req: Request, res: Response) => {
     const { email, password } = req.body;
     const queryString = "SELECT * FROM users WHERE email = $1;"
     try {
-      const result = await query(queryString, [email])      
-      if (result.rows.length > 0) {
-        const digestCheck = result.rows[0].password_digest;
-        const passwordCheck = bcrypt.compareSync(password, digestCheck);
-        if (passwordCheck) {
-          res.status(201).json(result.rows[0])
+      const result = await query(queryString, [email])
+      if (req.session) {
+        if (result.rows.length > 0) {
+          const digestCheck = result.rows[0].password_digest;
+          const passwordCheck = bcrypt.compareSync(password, digestCheck);
+          if (passwordCheck) {
+            req.session.userId = result.rows[0].id;
+            res.status(201).json(result.rows[0])
+          } else {
+            res.status(404).json("Incorrect Password.");
+          }
         } else {
-          res.status(404).json("Incorrect Password.");
-        }
-      } else {
-        res.status(404).json("User not found.");
-      }
+          res.status(404).json("User not found.");
+        };  
+      };
     } catch (error) {
       console.error("Login error", error)
       res.status(404).json(error)
@@ -123,11 +148,20 @@ app.use(express.json());
     
     try {
       const result = await query(queryString, [email, password_digest]);
-      res.status(201).json(result.rows[0]);
+      if (req.session) {
+        
+        req.session.userId = result.rows[0].id
+        res.status(201).json(result.rows[0]);
+      }
     } catch (error) {
       console.error("Error adding user to database", error);
     }
-  })
+  });
+
+  app.post("/api/logout", (req: Request, res: Response) => {    
+    req.session = null
+    res.status(201).json();
+  });
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -40,9 +40,20 @@ const App: React.FC = () => {
     }
   };
 
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get("/api/users");
+      setUser(response.data)
+    } catch (error) {
+      console.error("Error fetching user.", error);
+      setError("There was an error fetching user information. Please try again.")
+    }
+  }
+
   // useEffect, when passed an empty array will run only once when the page finishes loading
   useEffect(() => {
     fetchTodos();
+    fetchUser();
   }, []);
 
   // Handle new Todo 
@@ -97,7 +108,7 @@ const App: React.FC = () => {
     setUser(user);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setUser(null);
   };
 
