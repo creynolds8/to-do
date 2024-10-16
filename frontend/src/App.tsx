@@ -151,10 +151,15 @@ const App: React.FC = () => {
             element={
               <>
                 <Navbar user={user} handleLogout={handleLogout} />
-                <div className="mx-auto flex flex-col items-center p-4">
-                  <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List</h1>
+                <div className="mx-auto flex flex-col items-center p-4 gap-4">
                   <TodoForm onSubmit={handleTodoAdded} />
-                  {!(todos.length === 0) && <TodoList todos={todos} onToggleComplete={handleToggleComplete}/> }
+                  <h1 className="w-fit text-3xl underline underline-offset-4">To-Do List:</h1>
+                  {!(todos.length > 0) ? <TodoList todos={todos} onToggleComplete={handleToggleComplete}/> :
+                    <div className="text-center">
+                      <span className="text-xl text-green-500">Congragulations!</span><br />
+                      <span>It looks like you have completed all your tasks! Use the form to add a new todo!</span> 
+                    </div>
+                  }
                 </div>
               </>
             } 

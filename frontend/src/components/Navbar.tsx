@@ -20,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, handleLogout }) => {
   }
   return (
     <>
-      <nav className="flex items-center justify-between px-4 py-2 mb-4 bg-gray-300">
+      <nav className="flex items-center justify-between px-4 py-2 bg-gray-300">
         <Link to={"/"}>
           <span className="text-xl">
             To-Done!

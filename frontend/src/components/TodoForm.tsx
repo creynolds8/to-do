@@ -45,7 +45,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
   
   return (
     <div className="container my-4 flex flex-col items-center">
-      <h2>{todo ? "Update Todo" : "Add Todo"}</h2>
+      <h2>{todo ? "Update Todo:" : "Add a new Todo:"}</h2>
       <form className="flex flex-col items-center gap-2" onSubmit={handleSubmit}>
         <input
           className="p-1 border-2 rounded outline-gray-400"
