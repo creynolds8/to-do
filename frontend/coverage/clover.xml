@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1729139324490" clover="3.2.0">
-  <project timestamp="1729139324490" name="All files">
-    <metrics statements="88" coveredstatements="68" conditionals="24" coveredconditionals="14" methods="18" coveredmethods="13" elements="130" coveredelements="95" complexity="0" loc="88" ncloc="88" packages="1" files="4" classes="4"/>
+<coverage generated="1729142072716" clover="3.2.0">
+  <project timestamp="1729142072716" name="All files">
+    <metrics statements="100" coveredstatements="87" conditionals="26" coveredconditionals="17" methods="20" coveredmethods="18" elements="146" coveredelements="122" complexity="0" loc="100" ncloc="100" packages="1" files="5" classes="5"/>
     <file name="Index.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Index.tsx">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
@@ -10,31 +10,46 @@
       <line num="24" count="1" type="stmt"/>
     </file>
     <file name="Login.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Login.tsx">
-      <metrics statements="24" coveredstatements="12" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="1"/>
+      <metrics statements="24" coveredstatements="24" conditionals="2" coveredconditionals="2" methods="5" coveredmethods="5"/>
+      <line num="1" count="2" type="stmt"/>
+      <line num="2" count="2" type="stmt"/>
+      <line num="3" count="2" type="stmt"/>
+      <line num="9" count="2" type="stmt"/>
+      <line num="10" count="11" type="stmt"/>
+      <line num="11" count="11" type="stmt"/>
+      <line num="12" count="11" type="stmt"/>
+      <line num="13" count="11" type="stmt"/>
+      <line num="15" count="11" type="stmt"/>
+      <line num="17" count="11" type="stmt"/>
+      <line num="18" count="2" type="stmt"/>
+      <line num="19" count="2" type="stmt"/>
+      <line num="20" count="2" type="stmt"/>
+      <line num="21" count="1" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="24" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="32" count="11" type="stmt"/>
+      <line num="43" count="2" type="stmt"/>
+      <line num="51" count="3" type="stmt"/>
+      <line num="55" count="1" type="stmt"/>
+      <line num="67" count="2" type="stmt"/>
+    </file>
+    <file name="Navbar.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Navbar.tsx">
+      <metrics statements="12" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
-      <line num="3" count="1" type="stmt"/>
       <line num="9" count="1" type="stmt"/>
       <line num="10" count="1" type="stmt"/>
-      <line num="11" count="1" type="stmt"/>
       <line num="12" count="1" type="stmt"/>
-      <line num="13" count="1" type="stmt"/>
-      <line num="15" count="1" type="stmt"/>
-      <line num="17" count="1" type="stmt"/>
+      <line num="13" count="0" type="stmt"/>
+      <line num="14" count="0" type="stmt"/>
+      <line num="15" count="0" type="stmt"/>
+      <line num="16" count="0" type="stmt"/>
       <line num="18" count="0" type="stmt"/>
-      <line num="19" count="0" type="stmt"/>
-      <line num="20" count="0" type="stmt"/>
-      <line num="21" count="0" type="stmt"/>
-      <line num="22" count="0" type="stmt"/>
-      <line num="23" count="0" type="stmt"/>
-      <line num="24" count="0" type="stmt"/>
-      <line num="26" count="0" type="stmt"/>
-      <line num="27" count="0" type="stmt"/>
-      <line num="32" count="1" type="stmt"/>
-      <line num="43" count="0" type="stmt"/>
-      <line num="51" count="0" type="stmt"/>
-      <line num="55" count="0" type="stmt"/>
-      <line num="67" count="1" type="stmt"/>
+      <line num="21" count="1" type="stmt"/>
+      <line num="46" count="1" type="stmt"/>
     </file>
     <file name="Register.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Register.tsx">
       <metrics statements="30" coveredstatements="30" conditionals="6" coveredconditionals="6" methods="6" coveredmethods="6"/>
