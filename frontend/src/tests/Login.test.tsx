@@ -75,4 +75,23 @@ describe("tests for the Login component and functions", () => {
     const userId = screen.getByText("User Id: 1");
     expect(userId).toBeInTheDocument();
   });
+  test("password input is shown when checkbox is clicked", () => {
+    const onSubmit = jest.fn();
+    render(
+      <MemoryRouter initialEntries={["/login"]}>
+        <Routes>
+          <Route path="/login" element={
+            <Login onSubmit={onSubmit} />
+          } 
+          />
+        </Routes>
+      </MemoryRouter>
+    );
+    const checkbox = screen.getByRole("checkbox");
+    fireEvent.click(checkbox);
+    const passwordInput = screen.getByPlaceholderText("Password");
+    fireEvent.input(passwordInput, { target: { value: "visible" } });
+    const password = screen.getByDisplayValue("visible")
+    expect(password).toBeInTheDocument();
+  });
 });
