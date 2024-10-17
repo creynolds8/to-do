@@ -65,7 +65,7 @@ describe("tests for Register component and functions", () => {
     expect(password).toBeInTheDocument();
   });
 
-  test("error is correctly handle if passwords do not match", () => {
+  test("password error is correctly handled if passwords do not match", () => {
     const onSubmit = jest.fn();
     render(
       <MemoryRouter initialEntries={["/register"]}>
@@ -87,5 +87,31 @@ describe("tests for Register component and functions", () => {
     fireEvent.click(submitButton);
     const errorMessage = screen.getByText("Passwords must match. Please double-check and try again.");
     expect(errorMessage).toBeInTheDocument();
+  });
+
+  test("registration error is correctly handled in event of backend error", async () => {
+    const onSubmit = jest.fn();
+    (axios.post as jest.Mock).mockRejectedValueOnce(new Error("Registration failed"));
+    render(
+      <MemoryRouter initialEntries={["/register"]}>
+        <Routes>
+          <Route path="/register" element={
+            <Register onSubmit={onSubmit} />
+          } 
+          />
+        </Routes>
+      </MemoryRouter>
+    );
+    const emailInput = screen.getByPlaceholderText("Email");
+    fireEvent.input(emailInput, { target: { value: "jest@test.com"} });
+    const passwordInput = screen.getByPlaceholderText("Password");
+    fireEvent.input(passwordInput, { target: { value: "password"} });
+    const passwordConfirmInput = screen.getByPlaceholderText("Re-type Password");
+    fireEvent.input(passwordConfirmInput, { target: { value: "password"} });
+    const submitButton = screen.getByText("Register!");
+    fireEvent.click(submitButton);
+    const errorMessage = await screen.findByText("There was an error registering a new user");
+    expect(errorMessage).toBeInTheDocument();
+    expect(onSubmit).not.toHaveBeenCalled();
   });
 });
