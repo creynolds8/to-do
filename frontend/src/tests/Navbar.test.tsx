@@ -33,9 +33,10 @@ describe("tests for the Navbar component and functions", () => {
     const logoutButton = screen.getByText("Logout");
     fireEvent.click(logoutButton);
     await waitFor(() => {
-      expect(onLogout).toHaveBeenCalledTimes(1);
+      expect(onLogout).toHaveBeenCalledWith();
     });
     const indexCheck = screen.getByText("Welcome!");
     expect(indexCheck).toBeInTheDocument();
+    expect(onLogout).toHaveBeenCalledTimes(1);
   });
 });
