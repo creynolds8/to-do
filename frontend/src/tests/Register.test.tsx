@@ -6,6 +6,13 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 jest.mock("axios");
 
 describe("tests for Register component and functions", () => {
+  beforeEach(() => {
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+  });
+  
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
   test("renders the Register component, submits with valid input, redirects correctly to todos page", async () => {
     const onSubmit = jest.fn();
     (axios.post as jest.Mock).mockResolvedValue({
