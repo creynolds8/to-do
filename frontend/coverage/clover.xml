@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1729200499200" clover="3.2.0">
-  <project timestamp="1729200499200" name="All files">
-    <metrics statements="100" coveredstatements="91" conditionals="26" coveredconditionals="17" methods="20" coveredmethods="19" elements="146" coveredelements="127" complexity="0" loc="100" ncloc="100" packages="1" files="5" classes="5"/>
+<coverage generated="1729279956444" clover="3.2.0">
+  <project timestamp="1729279956444" name="All files">
+    <metrics statements="100" coveredstatements="98" conditionals="26" coveredconditionals="26" methods="20" coveredmethods="20" elements="146" coveredelements="144" complexity="0" loc="100" ncloc="100" packages="1" files="5" classes="5"/>
     <file name="Index.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Index.tsx">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <line num="1" count="2" type="stmt"/>
@@ -85,36 +85,36 @@
       <line num="80" count="2" type="stmt"/>
     </file>
     <file name="TodoForm.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoForm.tsx">
-      <metrics statements="30" coveredstatements="22" conditionals="16" coveredconditionals="7" methods="6" coveredmethods="5"/>
+      <metrics statements="30" coveredstatements="29" conditionals="16" coveredconditionals="16" methods="6" coveredmethods="6"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="9" count="1" type="stmt"/>
-      <line num="10" count="4" type="cond" truecount="1" falsecount="1"/>
-      <line num="11" count="4" type="cond" truecount="1" falsecount="1"/>
-      <line num="12" count="4" type="cond" truecount="1" falsecount="1"/>
-      <line num="14" count="4" type="stmt"/>
-      <line num="15" count="1" type="cond" truecount="0" falsecount="1"/>
-      <line num="16" count="0" type="stmt"/>
-      <line num="17" count="0" type="stmt"/>
-      <line num="21" count="4" type="stmt"/>
-      <line num="22" count="1" type="stmt"/>
-      <line num="24" count="1" type="cond" truecount="0" falsecount="1"/>
-      <line num="25" count="0" type="stmt"/>
-      <line num="26" count="0" type="stmt"/>
-      <line num="28" count="1" type="stmt"/>
-      <line num="30" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="10" count="14" type="cond" truecount="2" falsecount="0"/>
+      <line num="11" count="14" type="cond" truecount="2" falsecount="0"/>
+      <line num="12" count="14" type="cond" truecount="2" falsecount="0"/>
+      <line num="14" count="14" type="stmt"/>
+      <line num="15" count="4" type="cond" truecount="1" falsecount="0"/>
+      <line num="16" count="2" type="stmt"/>
+      <line num="17" count="2" type="stmt"/>
+      <line num="21" count="14" type="stmt"/>
+      <line num="22" count="3" type="stmt"/>
+      <line num="24" count="3" type="cond" truecount="1" falsecount="0"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="28" count="2" type="stmt"/>
+      <line num="30" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="31" count="1" type="stmt"/>
       <line num="32" count="1" type="stmt"/>
       <line num="33" count="1" type="stmt"/>
       <line num="34" count="1" type="stmt"/>
       <line num="35" count="1" type="stmt"/>
-      <line num="38" count="0" type="stmt"/>
-      <line num="39" count="0" type="stmt"/>
+      <line num="38" count="1" type="stmt"/>
+      <line num="39" count="1" type="stmt"/>
       <line num="42" count="0" type="stmt"/>
-      <line num="46" count="4" type="stmt"/>
-      <line num="55" count="1" type="stmt"/>
-      <line num="65" count="1" type="stmt"/>
-      <line num="77" count="0" type="stmt"/>
+      <line num="46" count="14" type="stmt"/>
+      <line num="55" count="3" type="stmt"/>
+      <line num="65" count="2" type="stmt"/>
+      <line num="77" count="2" type="stmt"/>
       <line num="91" count="1" type="stmt"/>
     </file>
   </project>
