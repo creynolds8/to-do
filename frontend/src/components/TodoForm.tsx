@@ -72,7 +72,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
           <input
             className={`ms-4 w-4 h-4 ${priority ? "accent-red-500" : ""}`}
             type="checkbox"
-            name="priority-checkbox"
+            id="priority-checkbox"
             checked={priority}
             onChange={(e) => setPriority(e.target.checked)}
             />
