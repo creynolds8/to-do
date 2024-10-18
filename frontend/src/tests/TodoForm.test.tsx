@@ -36,6 +36,7 @@ describe("tests for TodoForm component and functions", () => {
   });
   test("correctly renders todo data when passed a valid todo for update form", () => {
     const onSubmit = jest.fn();
+    jest.spyOn(window, 'alert').mockImplementation(() => {});
     const todo = {
       todo_id: 1,
       todo_title: 'New Todo',
