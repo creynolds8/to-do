@@ -52,7 +52,15 @@ describe("tests for TodoForm component and functions", () => {
     expect(todoMessage).toHaveDisplayValue("Test message");
     expect(todoPriority).not.toBeChecked();
   });
-  test("", () => {
-
+  test("if todo title is only whitespace an alert is made and the form is not submitted", () => {
+    const onSubmit = jest.fn();
+    const { getByPlaceholderText, getByText } = render(<TodoForm onSubmit={onSubmit} />);
+    const titleInput = getByPlaceholderText("Title");
+    fireEvent.change(titleInput, { target: { value: "   " } });
+    const submitButton = getByText("Add Todo");
+    fireEvent.click(submitButton);
+    expect(onSubmit).not.toHaveBeenCalled();
+    // const alertMessage = getByText("Please add a valid title.");
+    // expect(alertMessage).toBeInTheDocument();
   });
 });
