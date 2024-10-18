@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for Navbar.tsx</title>
+    <title>Code coverage report for TodoListItem.tsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> Navbar.tsx</h1>
+        <h1><a href="index.html">All files</a> TodoListItem.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/12</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>2/2</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/12</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -108,7 +108,19 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -116,19 +128,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,52 +166,75 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">import React from "react";
+import { Link } from "react-router-dom";
 &nbsp;
-interface NavbarProps {
-  user: { id: number; email: string } | null
-  handleLogout: () =&gt; void;
+interface Todo {
+  todo_id: number;
+  todo_title: string;
+  message: string;
+  priority: boolean;
+  completed: boolean;
 }
 &nbsp;
-const Navbar: React.FC&lt;NavbarProps&gt; = ({ user, handleLogout }) =&gt; {
-  const navigate = useNavigate();
+interface TodoListItemProps {
+  todo: Todo;
+  onToggleComplete: (id: number, completed: boolean) =&gt; void;
+}
 &nbsp;
-  const onLogout = async () =&gt; {
-    try {
-      await axios.post("/api/logout");
-      handleLogout();
-      navigate("/");
-    } catch (error) {
-<span class="cstat-no" title="statement not covered" >      console.error("Error logging out.")</span>
-    }
-  }
+const TodoListItem: React.FC&lt;TodoListItemProps&gt; = ({ todo, onToggleComplete }) =&gt; {
+  const handleChange = (e: React.ChangeEvent&lt;HTMLInputElement&gt;) =&gt; {    
+    onToggleComplete(todo.todo_id, e.target.checked);
+  };
+&nbsp;
   return (
-    &lt;&gt;
-      &lt;nav className="flex items-center justify-between px-4 py-2 min-h-16 bg-gray-300"&gt;
-        &lt;Link to={"/"}&gt;
-          &lt;span className="text-xl"&gt;
-            To-Done!
+    &lt;li className="p-4 bg-gray-100 rounded"&gt;
+      &lt;div className="flex justify-between"&gt;
+        &lt;div className="flex items-center"&gt;
+          &lt;input
+            name="todo-checkbox"
+            className={`me-4 w-4 h-4 ${todo.completed ? "accent-green-600" : ""}`}
+            type="checkbox"
+            checked={todo.completed}
+            onChange={handleChange}
+            data-testid="completed-checkbox"
+            /&gt;
+          {todo.todo_title}
+        &lt;/div&gt;
+        &lt;div className="flex items-center gap-4"&gt;
+          {todo.message &amp;&amp; &lt;span className="italic text-xs lg:text-base"&gt;More info&lt;/span&gt;}
+          &lt;Link to={`/todos/${todo.todo_id}`} className=""&gt;
+            &lt;img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/three-dots.svg" alt="View" width="16px" className="hover-enlarge lg:w-6" /&gt;
+          &lt;/Link&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div className="flex items-center justify-between"&gt;
+        &lt;span className="max-[350px]:text-xs text-sm lg:text-base"&gt;Status:
+          &lt;span className="ms-2"&gt;
+            {todo.completed ?
+            &lt;span className="text-green-600"&gt;Completed&lt;/span&gt; :
+            &lt;span className="text-gray-400"&gt;Pending&lt;/span&gt;
+          }
           &lt;/span&gt;
-        &lt;/Link&gt;
-          {user &amp;&amp;
-          &lt;&gt;
-            User Id: {user.id}
-            &lt;Link to={"/"} className="button danger hover:bg-red-500"&gt;
-              &lt;button onClick={onLogout}&gt;
-                Logout
-              &lt;/button&gt;
-            &lt;/Link&gt; 
-          &lt;/&gt;
-          
-          // &lt;Link to={"/login"} className="button success bg-green-500"&gt;Login&lt;/Link&gt;
-          }  
-      &lt;/nav&gt;
-    &lt;/&gt;
-  );
-};
+        &lt;/span&gt;
+        {todo.priority &amp;&amp; &lt;&gt;&lt;img src="https://raw.githubusercontent.com/creynolds8/to-do/0516c2549a768b2d8562cb4b3387d985ca6832f3/frontend/public/priority.svg" alt="!" width="16px" className="lg:w-6" /&gt;&lt;/&gt;}
+      &lt;/div&gt;
+    &lt;/li&gt;
+  )
+}
 &nbsp;
-export default Navbar;</pre></td></tr></table></pre>
+export default TodoListItem;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
             </div><!-- /wrapper -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1729279956444" clover="3.2.0">
-  <project timestamp="1729279956444" name="All files">
-    <metrics statements="100" coveredstatements="98" conditionals="26" coveredconditionals="26" methods="20" coveredmethods="20" elements="146" coveredelements="144" complexity="0" loc="100" ncloc="100" packages="1" files="5" classes="5"/>
+<coverage generated="1729283312724" clover="3.2.0">
+  <project timestamp="1729283312724" name="All files">
+    <metrics statements="112" coveredstatements="110" conditionals="34" coveredconditionals="34" methods="24" coveredmethods="24" elements="170" coveredelements="168" complexity="0" loc="112" ncloc="112" packages="1" files="7" classes="7"/>
     <file name="Index.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Index.tsx">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <line num="1" count="2" type="stmt"/>
@@ -116,6 +116,24 @@
       <line num="65" count="2" type="stmt"/>
       <line num="77" count="2" type="stmt"/>
       <line num="91" count="1" type="stmt"/>
+    </file>
+    <file name="TodoList.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoList.tsx">
+      <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="18" count="1" type="stmt"/>
+      <line num="19" count="2" type="stmt"/>
+      <line num="27" count="1" type="stmt"/>
+      <line num="36" count="1" type="stmt"/>
+    </file>
+    <file name="TodoListItem.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoListItem.tsx">
+      <metrics statements="6" coveredstatements="6" conditionals="8" coveredconditionals="8" methods="2" coveredmethods="2"/>
+      <line num="2" count="2" type="stmt"/>
+      <line num="17" count="2" type="stmt"/>
+      <line num="18" count="4" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="22" count="4" type="stmt"/>
+      <line num="58" count="2" type="stmt"/>
     </file>
   </project>
 </coverage>
