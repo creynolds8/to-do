@@ -29,6 +29,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({ todo, onToggleComplete }) =
             type="checkbox"
             checked={todo.completed}
             onChange={handleChange}
+            data-testid="completed-checkbox"
             />
           {todo.todo_title}
         </div>
