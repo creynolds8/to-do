@@ -3,26 +3,26 @@ import axios from "axios";
 
 interface TodoFormProps {
   todo?: { todo_id: number; todo_title: string; message: string; priority: boolean; completed: boolean };
-  onSubmit: (todo: { todo_id: number; todo_title: string; message: string; priority: boolean; completed: boolean; }) => void
-}
+  onSubmit: (todo: { todo_id: number; todo_title: string; message: string; priority: boolean; completed: boolean; }) => void;
+};
 
 const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
   const [title, setTitle] = useState<string>(todo ? todo.todo_title : "");
   const [message, setMessage] = useState<string>(todo ? todo.message : "");
-  const [priority, setPriority] = useState<boolean>(todo? todo.priority : false)
+  const [priority, setPriority] = useState<boolean>(todo? todo.priority : false);
 
   useEffect(() => {
     if (todo) {
       setTitle(todo.todo_title);
-      setMessage(todo.message)
-    }
-  },[todo])
+      setMessage(todo.message);
+    };
+  }, [todo]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // check for only white space inputs
     if (!title.trim()) {
-      alert("Please add a valid title.") 
+      alert("Please add a valid title.");
       return;
     }
     try {
@@ -32,16 +32,16 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
         onSubmit({ ...response.data });        
         setTitle("");
         setMessage("");
-        setPriority(false)
+        setPriority(false);
       // otherwise info is used to update the todo
       } else {        
-        const response = await axios.put(`/api/todos/${todo.todo_id}`, { title, message, priority })        
-        onSubmit({ ...response.data })
+        const response = await axios.put(`/api/todos/${todo.todo_id}`, { title, message, priority });            
+        onSubmit({ ...response.data });
       }
     } catch (error) {
       console.error("Error adding todo", error);
-    }
-  }
+    };
+  };
   
   return (
     <div className="container my-4 flex flex-col items-center">
