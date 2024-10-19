@@ -3,7 +3,7 @@ import TodoDetails from "../components/TodoDetails";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 
 describe("tests for TodoDetails component and functions", () => {
-  test("renders the component", () => {
+  test("renders the component and returns loading screen when todo is not given", () => {
     const onToggleComplete = jest.fn();
     const onUpdateTodo = jest.fn();
     const onDeleteTodo = jest.fn();

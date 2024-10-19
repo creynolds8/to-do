@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1729283312724" clover="3.2.0">
-  <project timestamp="1729283312724" name="All files">
-    <metrics statements="112" coveredstatements="110" conditionals="34" coveredconditionals="34" methods="24" coveredmethods="24" elements="170" coveredelements="168" complexity="0" loc="112" ncloc="112" packages="1" files="7" classes="7"/>
+<coverage generated="1729311865079" clover="3.2.0">
+  <project timestamp="1729311865079" name="All files">
+    <metrics statements="156" coveredstatements="127" conditionals="50" coveredconditionals="35" methods="36" coveredmethods="27" elements="242" coveredelements="189" complexity="0" loc="156" ncloc="156" packages="1" files="8" classes="8"/>
     <file name="Index.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Index.tsx">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <line num="1" count="2" type="stmt"/>
@@ -84,11 +84,58 @@
       <line num="70" count="1" type="stmt"/>
       <line num="80" count="2" type="stmt"/>
     </file>
-    <file name="TodoForm.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoForm.tsx">
-      <metrics statements="30" coveredstatements="29" conditionals="16" coveredconditionals="16" methods="6" coveredmethods="6"/>
+    <file name="TodoDetails.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoDetails.tsx">
+      <metrics statements="44" coveredstatements="17" conditionals="16" coveredconditionals="1" methods="12" coveredmethods="3"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
-      <line num="9" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="24" count="1" type="stmt"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="28" count="1" type="stmt"/>
+      <line num="29" count="1" type="stmt"/>
+      <line num="30" count="1" type="stmt"/>
+      <line num="31" count="1" type="stmt"/>
+      <line num="32" count="0" type="stmt"/>
+      <line num="34" count="0" type="stmt"/>
+      <line num="37" count="1" type="stmt"/>
+      <line num="40" count="1" type="cond" truecount="1" falsecount="0"/>
+      <line num="41" count="1" type="stmt"/>
+      <line num="44" count="0" type="stmt"/>
+      <line num="45" count="0" type="cond" truecount="0" falsecount="1"/>
+      <line num="47" count="0" type="stmt"/>
+      <line num="48" count="0" type="stmt"/>
+      <line num="49" count="0" type="stmt"/>
+      <line num="50" count="0" type="stmt"/>
+      <line num="51" count="0" type="stmt"/>
+      <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="61" count="0" type="stmt"/>
+      <line num="62" count="0" type="stmt"/>
+      <line num="63" count="0" type="stmt"/>
+      <line num="64" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="67" count="0" type="stmt"/>
+      <line num="68" count="0" type="stmt"/>
+      <line num="69" count="0" type="stmt"/>
+      <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="71" count="0" type="stmt"/>
+      <line num="74" count="0" type="stmt"/>
+      <line num="75" count="0" type="stmt"/>
+      <line num="78" count="0" type="stmt"/>
+      <line num="79" count="0" type="stmt"/>
+      <line num="80" count="0" type="stmt"/>
+      <line num="83" count="0" type="stmt"/>
+      <line num="90" count="0" type="stmt"/>
+      <line num="110" count="0" type="stmt"/>
+      <line num="137" count="1" type="stmt"/>
+    </file>
+    <file name="TodoForm.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoForm.tsx">
+      <metrics statements="30" coveredstatements="29" conditionals="16" coveredconditionals="16" methods="6" coveredmethods="6"/>
+      <line num="1" count="2" type="stmt"/>
+      <line num="2" count="2" type="stmt"/>
+      <line num="9" count="2" type="stmt"/>
       <line num="10" count="14" type="cond" truecount="2" falsecount="0"/>
       <line num="11" count="14" type="cond" truecount="2" falsecount="0"/>
       <line num="12" count="14" type="cond" truecount="2" falsecount="0"/>
@@ -115,7 +162,7 @@
       <line num="55" count="3" type="stmt"/>
       <line num="65" count="2" type="stmt"/>
       <line num="77" count="2" type="stmt"/>
-      <line num="91" count="1" type="stmt"/>
+      <line num="91" count="2" type="stmt"/>
     </file>
     <file name="TodoList.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoList.tsx">
       <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
