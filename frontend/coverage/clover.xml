@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1729311865079" clover="3.2.0">
-  <project timestamp="1729311865079" name="All files">
-    <metrics statements="156" coveredstatements="127" conditionals="50" coveredconditionals="35" methods="36" coveredmethods="27" elements="242" coveredelements="189" complexity="0" loc="156" ncloc="156" packages="1" files="8" classes="8"/>
+<coverage generated="1733609888652" clover="3.2.0">
+  <project timestamp="1733609888652" name="All files">
+    <metrics statements="156" coveredstatements="146" conditionals="50" coveredconditionals="43" methods="36" coveredmethods="32" elements="242" coveredelements="221" complexity="0" loc="156" ncloc="156" packages="1" files="8" classes="8"/>
     <file name="Index.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/Index.tsx">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <line num="1" count="2" type="stmt"/>
@@ -85,26 +85,26 @@
       <line num="80" count="2" type="stmt"/>
     </file>
     <file name="TodoDetails.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoDetails.tsx">
-      <metrics statements="44" coveredstatements="17" conditionals="16" coveredconditionals="1" methods="12" coveredmethods="3"/>
+      <metrics statements="44" coveredstatements="36" conditionals="16" coveredconditionals="9" methods="12" coveredmethods="8"/>
       <line num="1" count="1" type="stmt"/>
       <line num="2" count="1" type="stmt"/>
       <line num="3" count="1" type="stmt"/>
       <line num="5" count="1" type="stmt"/>
       <line num="22" count="1" type="stmt"/>
-      <line num="23" count="1" type="stmt"/>
-      <line num="24" count="1" type="stmt"/>
-      <line num="25" count="1" type="stmt"/>
-      <line num="26" count="1" type="stmt"/>
-      <line num="28" count="1" type="stmt"/>
-      <line num="29" count="1" type="stmt"/>
-      <line num="30" count="1" type="stmt"/>
-      <line num="31" count="1" type="stmt"/>
-      <line num="32" count="0" type="stmt"/>
-      <line num="34" count="0" type="stmt"/>
-      <line num="37" count="1" type="stmt"/>
-      <line num="40" count="1" type="cond" truecount="1" falsecount="0"/>
-      <line num="41" count="1" type="stmt"/>
-      <line num="44" count="0" type="stmt"/>
+      <line num="23" count="12" type="stmt"/>
+      <line num="24" count="12" type="stmt"/>
+      <line num="25" count="12" type="stmt"/>
+      <line num="26" count="12" type="stmt"/>
+      <line num="28" count="12" type="stmt"/>
+      <line num="29" count="5" type="stmt"/>
+      <line num="30" count="5" type="stmt"/>
+      <line num="31" count="5" type="stmt"/>
+      <line num="32" count="4" type="stmt"/>
+      <line num="34" count="1" type="stmt"/>
+      <line num="37" count="5" type="stmt"/>
+      <line num="40" count="12" type="cond" truecount="1" falsecount="0"/>
+      <line num="41" count="5" type="stmt"/>
+      <line num="44" count="7" type="stmt"/>
       <line num="45" count="0" type="cond" truecount="0" falsecount="1"/>
       <line num="47" count="0" type="stmt"/>
       <line num="48" count="0" type="stmt"/>
@@ -112,23 +112,23 @@
       <line num="50" count="0" type="stmt"/>
       <line num="51" count="0" type="stmt"/>
       <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="61" count="0" type="stmt"/>
-      <line num="62" count="0" type="stmt"/>
-      <line num="63" count="0" type="stmt"/>
-      <line num="64" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="67" count="0" type="stmt"/>
-      <line num="68" count="0" type="stmt"/>
-      <line num="69" count="0" type="stmt"/>
-      <line num="70" count="0" type="cond" truecount="0" falsecount="2"/>
-      <line num="71" count="0" type="stmt"/>
-      <line num="74" count="0" type="stmt"/>
-      <line num="75" count="0" type="stmt"/>
-      <line num="78" count="0" type="stmt"/>
-      <line num="79" count="0" type="stmt"/>
-      <line num="80" count="0" type="stmt"/>
-      <line num="83" count="0" type="stmt"/>
+      <line num="61" count="7" type="stmt"/>
+      <line num="62" count="1" type="stmt"/>
+      <line num="63" count="1" type="stmt"/>
+      <line num="64" count="1" type="cond" truecount="1" falsecount="1"/>
+      <line num="67" count="7" type="stmt"/>
+      <line num="68" count="1" type="stmt"/>
+      <line num="69" count="1" type="stmt"/>
+      <line num="70" count="1" type="cond" truecount="0" falsecount="2"/>
+      <line num="71" count="1" type="stmt"/>
+      <line num="74" count="7" type="stmt"/>
+      <line num="75" count="1" type="stmt"/>
+      <line num="78" count="7" type="stmt"/>
+      <line num="79" count="7" type="stmt"/>
+      <line num="80" count="7" type="stmt"/>
+      <line num="83" count="7" type="stmt"/>
       <line num="90" count="0" type="stmt"/>
-      <line num="110" count="0" type="stmt"/>
+      <line num="110" count="2" type="stmt"/>
       <line num="137" count="1" type="stmt"/>
     </file>
     <file name="TodoForm.tsx" path="/Users/cam/coding-projects/to-do/frontend/src/components/TodoForm.tsx">
@@ -136,14 +136,14 @@
       <line num="1" count="2" type="stmt"/>
       <line num="2" count="2" type="stmt"/>
       <line num="9" count="2" type="stmt"/>
-      <line num="10" count="14" type="cond" truecount="2" falsecount="0"/>
-      <line num="11" count="14" type="cond" truecount="2" falsecount="0"/>
-      <line num="12" count="14" type="cond" truecount="2" falsecount="0"/>
-      <line num="14" count="14" type="stmt"/>
-      <line num="15" count="4" type="cond" truecount="1" falsecount="0"/>
-      <line num="16" count="2" type="stmt"/>
-      <line num="17" count="2" type="stmt"/>
-      <line num="21" count="14" type="stmt"/>
+      <line num="10" count="16" type="cond" truecount="2" falsecount="0"/>
+      <line num="11" count="16" type="cond" truecount="2" falsecount="0"/>
+      <line num="12" count="16" type="cond" truecount="2" falsecount="0"/>
+      <line num="14" count="16" type="stmt"/>
+      <line num="15" count="6" type="cond" truecount="1" falsecount="0"/>
+      <line num="16" count="4" type="stmt"/>
+      <line num="17" count="4" type="stmt"/>
+      <line num="21" count="16" type="stmt"/>
       <line num="22" count="3" type="stmt"/>
       <line num="24" count="3" type="cond" truecount="1" falsecount="0"/>
       <line num="25" count="1" type="stmt"/>
@@ -158,7 +158,7 @@
       <line num="38" count="1" type="stmt"/>
       <line num="39" count="1" type="stmt"/>
       <line num="42" count="0" type="stmt"/>
-      <line num="46" count="14" type="stmt"/>
+      <line num="46" count="16" type="stmt"/>
       <line num="55" count="3" type="stmt"/>
       <line num="65" count="2" type="stmt"/>
       <line num="77" count="2" type="stmt"/>
