@@ -52,8 +52,10 @@ const App: React.FC = () => {
   
   // useEffect, when passed an empty array will run only once when the page finishes loading
   useEffect(() => {
-    fetchUser();
-    fetchTodos();
+    fetchUser()
+    if (user) {
+      fetchTodos();
+    }
   }, []);
 
   // Handle new Todo 
