@@ -64,15 +64,20 @@ app.use(cookieSession({
   // add new todo 
   app.post("/api/todos", async (req: Request, res: Response) => {
     let listResults;
+    console.log('req.session', req.session)
     if (req.session) {
       listResults = await query("SELECT * FROM todo_lists WHERE user_id = $1;", [req.session.userId])
     }
     const { title, message, priority } = req.body as { title: string, message: string, priority: boolean };
     const queryString = "INSERT INTO todos (todo_title, message, priority, todo_list_id) VALUES ($1, $2, $3, $4) RETURNING *;";
-    try {      
+    try {   
+      console.log('listResults', listResults);
+         
       const result = await query(queryString, [title, message, priority, listResults.rows[0].list_id]);    
       res.status(201).json(result.rows[0]);
     } catch (err) {
+      console.log('catch', req.session);
+      
       console.error("Error adding todo", err);
     };
   });
