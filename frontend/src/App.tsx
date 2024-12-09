@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
 
 import "../src/App.css";
 
@@ -12,7 +11,13 @@ import TodoDetails from "./components/TodoDetails";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+import axios from "axios";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
 
 interface Todo {
   todo_id: number;
@@ -34,7 +39,7 @@ const App: React.FC = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await axios.get("/api/todos");
+      const response = await api.get("/api/todos");
       setTodos(response.data);
     } catch (error) {
       console.error("Error fetching Todos", error);
@@ -44,7 +49,9 @@ const App: React.FC = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get(`${API_BASE_URL}/api/users`);
+      const response = await api.get(`/api/users`);
+      console.log(user);
+      
       setUser(response.data)
     } catch (error) {
       console.error("Error fetching user.", error);
@@ -67,7 +74,7 @@ const App: React.FC = () => {
 
   const handleToggleComplete = async (id: number, completed: boolean) => {    
       try {      
-        await axios.patch(`/api/todos/${id}`, { completed });
+        await api.patch(`/api/todos/${id}`, { completed });
         setTodos((prevTodos) =>         
         prevTodos.map((todo) => 
           todo.todo_id === id ? { ...todo, completed } : todo
@@ -79,7 +86,7 @@ const App: React.FC = () => {
 
   const handleUpdateTodo = async (id: number, title: string, message: string, priority: boolean) => {
     try {
-      const response = await axios.put(`/api/todos/${id}`, { title, message, priority });      
+      const response = await api.put(`/api/todos/${id}`, { title, message, priority });      
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
           todo.todo_id === id ? { 
@@ -98,7 +105,7 @@ const App: React.FC = () => {
   const handleDeleteTodo = async (id: number, active: boolean) => {
     if (confirm("WARNING! This action is permamnent and cannot be undone. Are you sure you wish to delete this todo?")) {
       try {
-        const response = await axios.patch(`/api/todos/${id}`, { active });
+        const response = await api.patch(`/api/todos/${id}`, { active });
         setTodos([...response.data])
         alert("Todo successfully deleted.")     
       } catch (error) {
