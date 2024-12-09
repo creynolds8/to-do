@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
-import dotenv from 'dotenv';
 
 import "../src/App.css";
 
@@ -13,9 +12,7 @@ import TodoDetails from "./components/TodoDetails";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
-dotenv.config();
-
-const API_BASE_URL = process.env.VITE_API_BASE_URL;
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 interface Todo {
   todo_id: number;
