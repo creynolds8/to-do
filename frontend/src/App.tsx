@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import dotenv from 'dotenv';
 
 import "../src/App.css";
 
@@ -11,6 +12,10 @@ import TodoList from "./components/TodoList";
 import TodoDetails from "./components/TodoDetails";
 import Login from "./components/Login";
 import Register from "./components/Register";
+
+dotenv.config();
+
+const API_BASE_URL = process.env.VITE_API_BASE_URL;
 
 interface Todo {
   todo_id: number;
@@ -42,7 +47,7 @@ const App: React.FC = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await axios.get("/api/users");
+      const response = await axios.get(`${API_BASE_URL}/api/users`);
       setUser(response.data)
     } catch (error) {
       console.error("Error fetching user.", error);
