@@ -4,6 +4,12 @@ import axios from "axios";
 
 import TodoForm from "./TodoForm";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
 interface Todo {
   todo_id: number;
   todo_title: string;
@@ -28,7 +34,7 @@ const TodoDetails: React.FC<TodoDetailProps> = ({ onToggleComplete, onUpdateTodo
   useEffect(() => {
     const fetchTodo = async () => {
       try {
-        const response = await axios.get(`/api/todos/${id}`);        
+        const response = await api.get(`/api/todos/${id}`);        
         setTodo(response.data);
       } catch (error) {
         console.error("Error fetching todo", error);

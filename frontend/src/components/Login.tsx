@@ -2,6 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
 interface LoginProps {
   onSubmit: (user: {id: number; email: string}) => void;
 };
@@ -17,7 +23,7 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {      
-      const response = await axios.post("/api/login", { email, password });
+      const response = await api.post("/api/login", { email, password });
       onSubmit({...response.data});
       setEmail("");
       setPassword("");

@@ -1,6 +1,12 @@
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
 interface NavbarProps {
   user: { id: number; email: string } | null
   handleLogout: () => void;
@@ -11,7 +17,7 @@ const Navbar: React.FC<NavbarProps> = ({ user, handleLogout }) => {
 
   const onLogout = async () => {
     try {
-      await axios.post("/api/logout");
+      await api.post("/api/logout");
       handleLogout();
       navigate("/");
     } catch (error) {
