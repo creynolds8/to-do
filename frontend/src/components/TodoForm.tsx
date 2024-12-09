@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
 interface TodoFormProps {
   todo?: { todo_id: number; todo_title: string; message: string; priority: boolean; completed: boolean };
   onSubmit: (todo: { todo_id: number; todo_title: string; message: string; priority: boolean; completed: boolean; }) => void;
@@ -28,14 +34,14 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
     try {
       // if todo is not set, info will be posted as a new todo
       if (!todo) {
-        const response = await axios.post("/api/todos", { title, message, priority });        
+        const response = await api.post("/api/todos", { title, message, priority });        
         onSubmit({ ...response.data });        
         setTitle("");
         setMessage("");
         setPriority(false);
       // otherwise info is used to update the todo
       } else {        
-        const response = await axios.put(`/api/todos/${todo.todo_id}`, { title, message, priority });            
+        const response = await api.put(`/api/todos/${todo.todo_id}`, { title, message, priority });            
         onSubmit({ ...response.data });
       }
     } catch (error) {

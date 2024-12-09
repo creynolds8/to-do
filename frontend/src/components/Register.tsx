@@ -2,6 +2,12 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:3000";
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+});
+
 interface RegisterProps {
   onSubmit: (user: {id: number; email: string}) => void
 }
@@ -20,7 +26,7 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 
     if (password === passwordConfirm) {
       try {        
-        const response = await axios.post("/api/register", {email, password});
+        const response = await api.post("/api/register", {email, password});
         onSubmit({...response.data})
         setEmail("");
         setPassword("");
