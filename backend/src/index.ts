@@ -3,10 +3,12 @@ import cors from "cors";
 import { query } from "../database/db";
 import bcrypt from "bcryptjs";
 import cookieSession from "cookie-session";
+import dotenv from "dotenv";
 
+dotenv.config()
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 3000;
 
 interface Todo {
   id: number;
