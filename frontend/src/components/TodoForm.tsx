@@ -34,14 +34,14 @@ const TodoForm: React.FC<TodoFormProps> = ({ todo, onSubmit}) => {
     try {
       // if todo is not set, info will be posted as a new todo
       if (!todo) {
-        const response = await api.post("/api/todos", { title, message, priority });        
+        const response = await api.post("/api/todos", { title, message, priority }, { withCredentials: true });        
         onSubmit({ ...response.data });        
         setTitle("");
         setMessage("");
         setPriority(false);
       // otherwise info is used to update the todo
       } else {        
-        const response = await api.put(`/api/todos/${todo.todo_id}`, { title, message, priority });            
+        const response = await api.put(`/api/todos/${todo.todo_id}`, { title, message, priority }, { withCredentials: true });            
         onSubmit({ ...response.data });
       }
     } catch (error) {
