@@ -17,7 +17,9 @@ interface Todo {
   completed: boolean;
 }
 
-app.use(cors());
+app.use(cors({
+  credentials: true,
+}));
 
 app.use(express.json());
 
@@ -146,7 +148,14 @@ app.use(cookieSession({
           const digestCheck = result.rows[0].password_digest;
           const passwordCheck = bcrypt.compareSync(password, digestCheck);
           if (passwordCheck) {
+            console.log('result', result);
+            
+            console.log('**pre', req.session);
+            
             req.session.userId = result.rows[0].id;
+
+            console.log('**post', req.session);
+            
             res.status(201).json(result.rows[0])
           } else {
             res.status(404).json("Incorrect Password.");

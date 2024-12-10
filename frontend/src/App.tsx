@@ -47,21 +47,21 @@ const App: React.FC = () => {
     }
   };
 
-  const fetchUser = async () => {
-    try {
-      const response = await api.get(`/api/users`);
-      console.log(user);
+  // const fetchUser = async () => {
+  //   try {
+  //     const response = await api.get(`/api/users`);
+  //     console.log(user);
       
-      setUser(response.data)
-    } catch (error) {
-      console.error("Error fetching user.", error);
-      setError("There was an error fetching user information. Please try again.")
-    }
-  }
+  //     setUser(response.data)
+  //   } catch (error) {
+  //     console.error("Error fetching user.", error);
+  //     setError("There was an error fetching user information. Please try again.")
+  //   }
+  // }
   
   // useEffect, when passed an empty array will run only once when the page finishes loading
   useEffect(() => {
-    fetchUser()
+    // fetchUser()
     if (user) {
       fetchTodos();
     }
