@@ -26,8 +26,8 @@ app.use(cookieSession({
   name: "session",
   keys: ["64321684"],
   maxAge: 24 * 60 * 60 * 1000,
-  sameSite: "none",
-  secure: false,
+  // sameSite: "none",
+  // secure: true,
 }));
 
 app.use(express.json());
