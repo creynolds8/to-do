@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 app.use(cookieSession({
-  name: "userId",
+  name: "session",
   keys: ["64321684"],
   sameSite: "none",
   secure: false,
