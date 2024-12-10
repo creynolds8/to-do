@@ -23,7 +23,7 @@ app.use(cors({
 }));
 
 app.use(cookieSession({
-  name: "session",
+  name: "userId",
   keys: ["64321684"],
   maxAge: 24 * 60 * 60 * 1000,
   // sameSite: "none",
