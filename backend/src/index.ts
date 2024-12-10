@@ -18,6 +18,7 @@ interface Todo {
 }
 
 app.use(cors({
+  origin: 'https://to-do-mx4m.onrender.com',
   credentials: true,
 }));
 
