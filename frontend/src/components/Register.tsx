@@ -26,7 +26,7 @@ const Register: React.FC<RegisterProps> = ({ onSubmit }) => {
 
     if (password === passwordConfirm) {
       try {        
-        const response = await api.post("/api/register", {email, password});
+        const response = await api.post("/api/register", {email, password}, { withCredentials: true });
         onSubmit({...response.data})
         setEmail("");
         setPassword("");

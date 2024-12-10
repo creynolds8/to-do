@@ -23,7 +23,7 @@ const Login: React.FC<LoginProps> = ({ onSubmit }) => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {      
-      const response = await api.post("/api/login", { email, password });
+      const response = await api.post("/api/login", { email, password }, { withCredentials: true });
       onSubmit({...response.data});
       setEmail("");
       setPassword("");
