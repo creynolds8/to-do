@@ -18,7 +18,7 @@ interface Todo {
 }
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'https://to-do-mx4m.onrender.com',
   credentials: true,
 }));
 
