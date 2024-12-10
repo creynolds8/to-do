@@ -22,14 +22,14 @@ app.use(cors({
   credentials: true,
 }));
 
-app.use(express.json());
-
 app.use(cookieSession({
   name: "userId",
   keys: ["64321684"],
   sameSite: "none",
   secure: false,
 }));
+
+app.use(express.json());
 
 // TODO ROUTES 
 
