@@ -18,7 +18,7 @@ interface Todo {
 }
 
 app.use(cors({
-  origin: 'https://to-do-mx4m.onrender.com',
+  origin: 'http://localhost:5173/',
   credentials: true,
 }));
 
@@ -28,7 +28,7 @@ app.use(cookieSession({
   name: "userId",
   keys: ["64321684"],
   sameSite: "none",
-  secure: true,
+  secure: false,
 }));
 
 // TODO ROUTES 
