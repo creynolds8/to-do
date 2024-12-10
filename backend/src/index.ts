@@ -25,7 +25,9 @@ app.use(express.json());
 
 app.use(cookieSession({
   name: "userId",
-  keys: ["64321684"]
+  keys: ["64321684"],
+  sameSite: "none",
+  secure: true,
 }));
 
 // TODO ROUTES 
