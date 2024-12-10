@@ -39,7 +39,7 @@ const App: React.FC = () => {
 
   const fetchTodos = async () => {
     try {
-      const response = await api.get("/api/todos");
+      const response = await api.get("/api/todos", { withCredentials: true });
       setTodos(response.data);
     } catch (error) {
       console.error("Error fetching Todos", error);
@@ -74,7 +74,7 @@ const App: React.FC = () => {
 
   const handleToggleComplete = async (id: number, completed: boolean) => {    
       try {      
-        await api.patch(`/api/todos/${id}`, { completed });
+        await api.patch(`/api/todos/${id}`, { completed }, { withCredentials: true });
         setTodos((prevTodos) =>         
         prevTodos.map((todo) => 
           todo.todo_id === id ? { ...todo, completed } : todo
@@ -86,7 +86,7 @@ const App: React.FC = () => {
 
   const handleUpdateTodo = async (id: number, title: string, message: string, priority: boolean) => {
     try {
-      const response = await api.put(`/api/todos/${id}`, { title, message, priority });      
+      const response = await api.put(`/api/todos/${id}`, { title, message, priority }, { withCredentials: true });      
       setTodos((prevTodos) =>
         prevTodos.map((todo) =>
           todo.todo_id === id ? { 
@@ -105,7 +105,7 @@ const App: React.FC = () => {
   const handleDeleteTodo = async (id: number, active: boolean) => {
     if (confirm("WARNING! This action is permamnent and cannot be undone. Are you sure you wish to delete this todo?")) {
       try {
-        const response = await api.patch(`/api/todos/${id}`, { active });
+        const response = await api.patch(`/api/todos/${id}`, { active }, { withCredentials: true });
         setTodos([...response.data])
         alert("Todo successfully deleted.")     
       } catch (error) {
